@@ -2,7 +2,7 @@
   <div role="application" aria-label="Compact color picker" class="vc-compact">
     <ul class="vc-compact-colors" role="listbox">
       <li
-        v-for="color in colorsArrayUpperCase()"
+        v-for="color in paletteUpperCase(palette)"
         role="option"
         :aria-label="'color:' + color"
         :aria-selected="color === pick"
@@ -64,24 +64,27 @@ export default {
       return this.colors.hex.toUpperCase()
     }
   },
+  mounted () {
+    console.log('flexColorSettings array:', this.flexColorSettings)
+  },
   methods: {
     handlerClick (color) {
       this.colorChange({
         hex: color,
         source: 'hex'
       })
-    },
-    colorsArrayUpperCase () {
-      let array = this.paletteUpperCase(this.palette, this.flexColorSettings)
-      console.log('colorsArrayUpperCase colors variable:', array)
-      if (typeof array[0] === 'string') {
-        return array
-      } else if (typeof array[0] === 'object') {
-        return array.map(() => {
-          return array.value
-        })
-      }
     }
+    // colorsArrayUpperCase () {
+    //   let array = this.paletteUpperCase(this.palette, this.flexColorSettings)
+    //   console.log('colorsArrayUpperCase colors variable:', array)
+    //   if (typeof array[0] === 'string') {
+    //     return array
+    //   } else if (typeof array[0] === 'object') {
+    //     return array.map(() => {
+    //       return array.value
+    //     })
+    //   }
+    // }
   }
 }
 

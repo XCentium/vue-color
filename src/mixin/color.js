@@ -113,24 +113,24 @@ export default {
       }
     },
     paletteUpperCase (palette, flexColorSettings) {
-      console.log('flexColorSettings in paletteUpperCase:', flexColorSettings)
-      if (flexColorSettings instanceof Array) {
-        console.log('Inside flexColorSettings if check')
-        let flexColorValues = flexColorSettings.map((colorObject) => {
-          return colorObject.value
-        })
+      // console.log('flexColorSettings in paletteUpperCase:', flexColorSettings)
+      // if (flexColorSettings instanceof Array) {
+      //   console.log('Inside flexColorSettings if check')
+      //   let flexColorValues = flexColorSettings.map((colorObject) => {
+      //     return colorObject.value
+      //   })
 
-        return palette.map((color) => {
-          let pos = flexColorValues.indexOf(color.toUpperCase())
-          if (pos > -1) {
-            return { displayName: flexColorSettings[pos].displayName, value: flexColorSettings[pos].value.toUpperCase() }
-          } else if (color.toLowerCase() === 'transparent') {
-            return { displayName: 'Transparent', value: 'transparent' }
-          } else {
-            return { displayName: '', value: '' }
-          }
-        })
-      }
+      //   return palette.map((color) => {
+      //     let pos = flexColorValues.indexOf(color.toUpperCase())
+      //     if (pos > -1) {
+      //       return { displayName: flexColorSettings[pos].displayName, value: flexColorSettings[pos].value.toUpperCase() }
+      //     } else if (color.toLowerCase() === 'transparent') {
+      //       return { displayName: 'Transparent', value: 'transparent' }
+      //     } else {
+      //       return { displayName: '', value: '' }
+      //     }
+      //   })
+      // }
       return palette.map(c => c.toUpperCase())
     },
     isTransparent (color) {
