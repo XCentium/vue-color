@@ -2,19 +2,25 @@
   <div role="application" aria-label="Compact color picker" class="vc-compact">
     <ul class="vc-compact-colors" role="listbox">
       <li
-        v-for="c in paletteUpperCase(palette)"
+        v-for="color in colorsArrayUpperCase()"
         role="option"
-        :aria-label="'color:' + c"
-        :aria-selected="c === pick"
+        :aria-label="'color:' + color"
+        :aria-selected="color === pick"
         class="vc-compact-color-item"
-        :key="c"
-        :class="{'vc-compact-color-item--white': c === '#FFFFFF' }"
-        :style="{background: c}"
-        @click="handlerClick(c)"
+        :key="color"
+        :class="{'vc-compact-color-item--white': color === '#FFFFFF' || color === 'transparent' }"
+        :style="{background: color}"
+        @mouseover="hoveredColor = color"
+        @mouseleave="hoveredColor = null"
+        @click="handlerClick(color)"
       >
-        <div class="vc-compact-dot" v-show="c === pick"></div>
+        <div class="vc-compact-dot" v-show="color === pick"></div>
       </li>
     </ul>
+    <!-- <div class="vc-compact-meta-data">
+      <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span>
+      <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span>
+    </div> -->
   </div>
 </template>
 
@@ -40,10 +46,18 @@ export default {
       default () {
         return defaultColors
       }
+    },
+    flexColorSettings: {
+      type: Array
     }
   },
   components: {
     'ed-in': editableInput
+  },
+  data () {
+    return {
+      hoveredColor: null
+    }
   },
   computed: {
     pick () {
@@ -51,11 +65,22 @@ export default {
     }
   },
   methods: {
-    handlerClick (c) {
+    handlerClick (color) {
       this.colorChange({
-        hex: c,
+        hex: color,
         source: 'hex'
       })
+    },
+    colorsArrayUpperCase () {
+      let array = this.paletteUpperCase(this.palette, this.flexColorSettings)
+      console.log('colorsArrayUpperCase colors variable:', array)
+      if (typeof array[0] === 'string') {
+        return array
+      } else if (typeof array[0] === 'object') {
+        return array.map(() => {
+          return array.value
+        })
+      }
     }
   }
 }
@@ -102,5 +127,10 @@ export default {
   border-radius: 50%;
   opacity: 1;
   background: #fff;
+}
+
+.vc-compact-meta-data {
+  min-height: 20px;
+  font-size: .8rem
 }
 </style>

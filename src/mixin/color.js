@@ -68,6 +68,17 @@ export default {
         this.$emit('input', newVal)
       }
     }
+    // colorDetails () {
+    //   let colorToFind
+    //   if (this.hoveredColor) {
+    //     colorToFind = this.hoveredColor
+    //   } else if (!this.pick) {
+    //     return { displayName: '', value: '' }
+    //   } else {
+    //     colorToFind = this.value.hex
+    //   }
+    //   return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
+    // }
   },
   watch: {
     value (newVal) {
@@ -101,7 +112,25 @@ export default {
         return data
       }
     },
-    paletteUpperCase (palette) {
+    paletteUpperCase (palette, flexColorSettings) {
+      console.log('flexColorSettings in paletteUpperCase:', flexColorSettings)
+      if (flexColorSettings instanceof Array) {
+        console.log('Inside flexColorSettings if check')
+        let flexColorValues = flexColorSettings.map((colorObject) => {
+          return colorObject.value
+        })
+
+        return palette.map((color) => {
+          let pos = flexColorValues.indexOf(color.toUpperCase())
+          if (pos > -1) {
+            return { displayName: flexColorSettings[pos].displayName, value: flexColorSettings[pos].value.toUpperCase() }
+          } else if (color.toLowerCase() === 'transparent') {
+            return { displayName: 'Transparent', value: 'transparent' }
+          } else {
+            return { displayName: '', value: '' }
+          }
+        })
+      }
       return palette.map(c => c.toUpperCase())
     },
     isTransparent (color) {
