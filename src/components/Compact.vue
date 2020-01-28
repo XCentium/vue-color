@@ -17,10 +17,11 @@
         <div class="vc-compact-dot" v-show="color === pick"></div>
       </li>
     </ul>
-    <!-- <div class="vc-compact-meta-data">
-      <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span>
-      <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span>
-    </div> -->
+    <div class="vc-compact-meta-data">
+      <!-- <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span> -->
+      <!-- <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span> -->
+      <span v-if="hoveredColor">Value: {{ hoveredColor }}</span>
+    </div>
   </div>
 </template>
 
@@ -65,7 +66,7 @@ export default {
     }
   },
   mounted () {
-    console.log('flexColorSettings array:', this.flexColorSettings)
+    // console.log('flexColorSettings array:', this.flexColorSettings)
   },
   methods: {
     handlerClick (color) {

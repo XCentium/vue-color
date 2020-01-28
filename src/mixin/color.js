@@ -67,18 +67,19 @@ export default {
         this.val = newVal
         this.$emit('input', newVal)
       }
+    },
+    colorDetails () {
+      // let colorToFind
+      console.log('this.hoveredColor', this.hoveredColor)
+      // if (this.hoveredColor) {
+      //   colorToFind = this.hoveredColor
+      // } else if (!this.pick) {
+      //   return { displayName: '', value: '' }
+      // } else {
+      //   colorToFind = this.value.hex
+      // }
+      // return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
     }
-    // colorDetails () {
-    //   let colorToFind
-    //   if (this.hoveredColor) {
-    //     colorToFind = this.hoveredColor
-    //   } else if (!this.pick) {
-    //     return { displayName: '', value: '' }
-    //   } else {
-    //     colorToFind = this.value.hex
-    //   }
-    //   return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
-    // }
   },
   watch: {
     value (newVal) {

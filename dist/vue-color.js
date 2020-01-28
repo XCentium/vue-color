@@ -561,6 +561,9 @@ exports.default = {
         this.val = newVal;
         this.$emit('input', newVal);
       }
+    },
+    colorDetails: function colorDetails() {
+      console.log('this.hoveredColor', this.hoveredColor);
     }
   },
   watch: {
@@ -947,9 +950,7 @@ exports.default = {
       return this.colors.hex.toUpperCase();
     }
   },
-  mounted: function mounted() {
-    console.log('flexColorSettings array:', this.flexColorSettings);
-  },
+  mounted: function mounted() {},
 
   methods: {
     handlerClick: function handlerClick(color) {
@@ -3616,7 +3617,13 @@ var render = function() {
             ]
           )
         })
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "vc-compact-meta-data" }, [
+        _vm.hoveredColor
+          ? _c("span", [_vm._v("Value: " + _vm._s(_vm.hoveredColor))])
+          : _vm._e()
+      ])
     ]
   )
 }
