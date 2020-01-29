@@ -1,5 +1,5 @@
 <template>
-  <div role="application" aria-label="Compact color picker" class="vc-compact">
+  <div role="application" aria-label="Compact color picker" class="vc-compact" :class="{'big-swatch-styles': bigSwatchStyles}">
     <ul class="vc-compact-colors" role="listbox">
       <li
         v-for="c in paletteUpperCase(palette)"
@@ -8,13 +8,13 @@
         :aria-selected="c === pick"
         class="vc-compact-color-item"
         :key="c"
-        :class="{'vc-compact-color-item--white': c === '#FFFFFF'}"
+        :class="{'vc-compact-color-item--white': c === '#FFFFFF', 'big-swatch-styles': bigSwatchStyles}"
         :style="{background: c}"
         @mouseover="hoveredColor = c"
         @mouseleave="hoveredColor = null"
         @click="handlerClick(c)"
       >
-        <div class="vc-compact-dot" v-show="c === pick"></div>
+        <div class="vc-compact-dot" :class="{'big-swatch-styles': bigSwatchStyles}" v-show="c === pick"></div>
       </li>
     </ul>
     <div class="vc-compact-meta-data">
@@ -46,6 +46,10 @@ export default {
       default () {
         return defaultColors
       }
+    },
+    bigSwatchStyles: {
+      type: Boolean,
+      default: true
     },
     flexColorSettings: {
       type: Array
@@ -88,6 +92,9 @@ export default {
   box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);
   background-color: #fff;
 }
+.vc-compact.big-swatch-styles {
+  width: 217px;
+}
 .vc-compact-colors {
   overflow: hidden;
   padding: 0;
@@ -102,6 +109,10 @@ export default {
   margin-bottom: 5px;
   position: relative;
   cursor: pointer;
+}
+.vc-compact-color-item.big-swatch-styles {
+  width: 26px;
+  height: 26px;
 }
 .vc-compact-color-item--white {
   box-shadow: inset 0 0 0 1px #ddd;
@@ -119,6 +130,12 @@ export default {
   border-radius: 50%;
   opacity: 1;
   background: #fff;
+}
+.vc-compact-dot.big-swatch-styles {
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
 }
 
 .vc-compact-meta-data {

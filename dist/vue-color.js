@@ -949,6 +949,10 @@ exports.default = {
         return defaultColors;
       }
     },
+    bigSwatchStyles: {
+      type: Boolean,
+      default: true
+    },
     flexColorSettings: {
       type: Array
     }
@@ -2235,7 +2239,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.vc-compact {\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact-colors {\r\n  overflow: hidden;\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\n.vc-compact-color-item--white {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-meta-data {\r\n  min-height: 17px;\r\n  font-size: .8rem\n}\r\n", ""]);
+exports.push([module.i, "\n.vc-compact {\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact.big-swatch-styles {\r\n  width: 217px;\n}\n.vc-compact-colors {\r\n  overflow: hidden;\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\n.vc-compact-color-item.big-swatch-styles {\r\n  width: 26px;\r\n  height: 26px;\n}\n.vc-compact-color-item--white {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-dot.big-swatch-styles {\r\n  top: 8px;\r\n  right: 8px;\r\n  bottom: 8px;\r\n  left: 8px;\n}\n.vc-compact-meta-data {\r\n  min-height: 17px;\r\n  font-size: .8rem\n}\r\n", ""]);
 
 // exports
 
@@ -3583,6 +3587,7 @@ var render = function() {
     "div",
     {
       staticClass: "vc-compact",
+      class: { "big-swatch-styles": _vm.bigSwatchStyles },
       attrs: { role: "application", "aria-label": "Compact color picker" }
     },
     [
@@ -3595,7 +3600,10 @@ var render = function() {
             {
               key: c,
               staticClass: "vc-compact-color-item",
-              class: { "vc-compact-color-item--white": c === "#FFFFFF" },
+              class: {
+                "vc-compact-color-item--white": c === "#FFFFFF",
+                "big-swatch-styles": _vm.bigSwatchStyles
+              },
               style: { background: c },
               attrs: {
                 role: "option",
@@ -3624,7 +3632,8 @@ var render = function() {
                     expression: "c === pick"
                   }
                 ],
-                staticClass: "vc-compact-dot"
+                staticClass: "vc-compact-dot",
+                class: { "big-swatch-styles": _vm.bigSwatchStyles }
               })
             ]
           )
