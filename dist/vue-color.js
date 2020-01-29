@@ -570,19 +570,20 @@ exports.default = {
         colorToFind = this.hoveredColor;
         if (this.flexColorSettings) {
           console.log('inside hoveredColor flexColorSettings if check');
-          console.log('this.flexColorSettings.findIndex(object => object.value === colorToFind)', this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+          console.log('this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())', this.flexColorSettings.findIndex(function (object) {
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           }));
           console.log('value in color object:', this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
-          })].value : 'Not Found');
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
+          })] : 'Not Found');
+          console.log('#######################');
 
           return this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           })] : { displayName: '', value: colorToFind };
         }
         console.log('this.flexColorSettings does not exist, could not find color name.');
@@ -594,22 +595,24 @@ exports.default = {
         colorToFind = this.pick;
         if (this.flexColorSettings) {
           console.log('inside pick flexColorSettings if check');
-          console.log('this.flexColorSettings.findIndex(object => object.value === colorToFind)', this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+          console.log('this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())', this.flexColorSettings.findIndex(function (object) {
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           }));
           console.log('value in color object:', this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
-          })].value : 'Not Found');
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
+          })] : 'Not Found');
+          console.log('#######################');
 
           return this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value === colorToFind;
+            return object.value.toUpperCase() === colorToFind.toUpperCase();
           })] : { displayName: '', value: colorToFind };
         }
         console.log('this.flexColorSettings does not exist, could not find color name.');
+        console.log('#######################');
         return { displayName: '', value: this.pick };
       }
 
