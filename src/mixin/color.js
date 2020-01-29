@@ -69,16 +69,52 @@ export default {
       }
     },
     colorDetails () {
-      // let colorToFind
-      console.log('this.hoveredColor', this.hoveredColor)
-      // if (this.hoveredColor) {
-      //   colorToFind = this.hoveredColor
-      // } else if (!this.pick) {
-      //   return { displayName: '', value: '' }
-      // } else {
+      console.log('this.value.hex', this.value.hex)
+      let colorToFind
+
+      if (this.hoveredColor) {
+        colorToFind = this.hoveredColor
+        if (this.flexColorSettings) {
+          return this.findFlexColorObject(colorToFind, this.flexColorSettings)
+        }
+        return { displayName: '', value: this.hoveredColor }
+      }
+
+      if (this.pick) {
+        colorToFind = this.pick
+        if (this.flexColorSettings) {
+          return this.findFlexColorObject(colorToFind, this.flexColorSettings)
+        }
+        return { displayName: '', value: this.pick }
+      }
+
+      // if (this.value.hex && this.flexColorSettings) {
       //   colorToFind = this.value.hex
+      //   return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
       // }
-      // return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
+
+      return { displayName: '', value: '' }
+      // if (this.flexColorSettings) {
+      //   let colorToFind
+      //   if (this.hoveredColor) {
+      //     colorToFind = this.hoveredColor
+      //   } else if (!this.pick) {
+      //     console.log('this.pick', this.pick)
+      //     return { displayName: '', value: '' }
+      //   } else {
+      //     colorToFind = this.value.hex
+      //   }
+      //   console.log('this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: , value: colorToFind }', this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind })
+
+      //   return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
+      // }
+      // if (this.value.hex) {
+      //   return { displayName: '', value: this.value.hex }
+      // }
+      // return { displayName: '', value: '' }
+    },
+    findFlexColorObject (colorToFind, flexColorObjectsArray) {
+      flexColorObjectsArray.findIndex(object => object.value === colorToFind) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
     }
   },
   watch: {

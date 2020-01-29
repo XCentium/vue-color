@@ -18,9 +18,9 @@
       </li>
     </ul>
     <div class="vc-compact-meta-data">
-      <!-- <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span> -->
-      <!-- <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span> -->
-      <span v-if="hoveredColor">Value: {{ hoveredColor }}</span>
+      <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span>
+      <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span>
+      <!-- <span v-if="hoveredColor">Value: {{ hoveredColor }}</span> -->
     </div>
   </div>
 </template>
@@ -62,11 +62,9 @@ export default {
   },
   computed: {
     pick () {
+      // console.log('this.colors.hex', this.colors.hex);
       return this.colors.hex.toUpperCase()
     }
-  },
-  mounted () {
-    // console.log('flexColorSettings array:', this.flexColorSettings)
   },
   methods: {
     handlerClick (color) {
@@ -134,7 +132,7 @@ export default {
 }
 
 .vc-compact-meta-data {
-  min-height: 20px;
+  min-height: 17px;
   font-size: .8rem
 }
 </style>

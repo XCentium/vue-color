@@ -563,7 +563,33 @@ exports.default = {
       }
     },
     colorDetails: function colorDetails() {
-      console.log('this.hoveredColor', this.hoveredColor);
+      console.log('this.value.hex', this.value.hex);
+      var colorToFind = void 0;
+
+      if (this.hoveredColor) {
+        colorToFind = this.hoveredColor;
+        if (this.flexColorSettings) {
+          return this.findFlexColorObject(colorToFind, this.flexColorSettings);
+        }
+        return { displayName: '', value: this.hoveredColor };
+      }
+
+      if (this.pick) {
+        colorToFind = this.pick;
+        if (this.flexColorSettings) {
+          return this.findFlexColorObject(colorToFind, this.flexColorSettings);
+        }
+        return { displayName: '', value: this.pick };
+      }
+
+      return { displayName: '', value: '' };
+    },
+    findFlexColorObject: function findFlexColorObject(colorToFind, flexColorObjectsArray) {
+      flexColorObjectsArray.findIndex(function (object) {
+        return object.value === colorToFind;
+      }) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(function (object) {
+        return object.value === colorToFind;
+      })] : { displayName: '', value: colorToFind };
     }
   },
   watch: {
@@ -950,8 +976,6 @@ exports.default = {
       return this.colors.hex.toUpperCase();
     }
   },
-  mounted: function mounted() {},
-
   methods: {
     handlerClick: function handlerClick(color) {
       this.colorChange({
@@ -2220,7 +2244,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.vc-compact {\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact-colors {\r\n  overflow: hidden;\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\n.vc-compact-color-item--white {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-meta-data {\r\n  min-height: 20px;\r\n  font-size: .8rem\n}\r\n", ""]);
+exports.push([module.i, "\n.vc-compact {\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact-colors {\r\n  overflow: hidden;\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\n.vc-compact-color-item--white {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-meta-data {\r\n  min-height: 17px;\r\n  font-size: .8rem\n}\r\n", ""]);
 
 // exports
 
@@ -3620,8 +3644,14 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "vc-compact-meta-data" }, [
-        _vm.hoveredColor
-          ? _c("span", [_vm._v("Value: " + _vm._s(_vm.hoveredColor))])
+        _vm.colorDetails.displayName
+          ? _c("span", [
+              _vm._v("Name: " + _vm._s(_vm.colorDetails.displayName) + ",")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.colorDetails.value
+          ? _c("span", [_vm._v("Value: " + _vm._s(_vm.colorDetails.value))])
           : _vm._e()
       ])
     ]
