@@ -18,9 +18,9 @@
       </li>
     </ul>
     <div class="vc-compact-meta-data">
+      {{ colorDetails }}
       <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span>
       <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span>
-      <!-- <span v-if="hoveredColor">Value: {{ hoveredColor }}</span> -->
     </div>
   </div>
 </template>

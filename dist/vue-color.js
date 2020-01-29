@@ -563,34 +563,57 @@ exports.default = {
       }
     },
     colorDetails: function colorDetails() {
-      console.log('this.value.hex', this.value.hex);
-      console.log('this.pick', this.pick);
       var colorToFind = void 0;
 
       if (this.hoveredColor) {
+        console.log('this.hoveredColor exists:', this.hoveredColor);
         colorToFind = this.hoveredColor;
         if (this.flexColorSettings) {
+          console.log('inside hoveredColor flexColorSettings if check');
+          console.log('this.flexColorSettings.findIndex(object => object.value === colorToFind)', this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          }));
+          console.log('value in color object:', this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          })].value : 'Not Found');
+
           return this.flexColorSettings.findIndex(function (object) {
             return object.value === colorToFind;
           }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
             return object.value === colorToFind;
           })] : { displayName: '', value: colorToFind };
         }
+        console.log('this.flexColorSettings does not exist, could not find color name.');
         return { displayName: '', value: this.hoveredColor };
       }
 
       if (this.pick) {
+        console.log('this.pick exists:', this.pick);
         colorToFind = this.pick;
         if (this.flexColorSettings) {
+          console.log('inside pick flexColorSettings if check');
+          console.log('this.flexColorSettings.findIndex(object => object.value === colorToFind)', this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          }));
+          console.log('value in color object:', this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          })].value : 'Not Found');
+
           return this.flexColorSettings.findIndex(function (object) {
             return object.value === colorToFind;
           }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
             return object.value === colorToFind;
           })] : { displayName: '', value: colorToFind };
         }
+        console.log('this.flexColorSettings does not exist, could not find color name.');
         return { displayName: '', value: this.pick };
       }
 
+      console.log('this.hoveredColor nor this.pick exists, returning empty values');
       return { displayName: '', value: '' };
     }
   },
@@ -626,21 +649,10 @@ exports.default = {
         return data;
       }
     },
-    paletteUpperCase: function paletteUpperCase(palette, flexColorSettings) {
+    paletteUpperCase: function paletteUpperCase(palette) {
       return palette.map(function (c) {
         return c.toUpperCase();
       });
-    },
-    findFlexColorObject: function findFlexColorObject(colorToFind, flexColorObjectsArray) {
-      console.log('flexColorObjectsArray value in findFlexColorObject', flexColorObjectsArray);
-      console.log('flexColorObjectsArray.findIndex(object => object.value === colorToFind)', flexColorObjectsArray.findIndex(function (object) {
-        return object.value === colorToFind;
-      }));
-      flexColorObjectsArray.findIndex(function (object) {
-        return object.value === colorToFind;
-      }) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(function (object) {
-        return object.value === colorToFind;
-      })] : { displayName: '', value: colorToFind };
     },
     isTransparent: function isTransparent(color) {
       return (0, _tinycolor2.default)(color).getAlpha() === 0;
@@ -3657,6 +3669,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "vc-compact-meta-data" }, [
+        _vm._v("\n    " + _vm._s(_vm.colorDetails) + "\n    "),
         _vm.colorDetails.displayName
           ? _c("span", [
               _vm._v("Name: " + _vm._s(_vm.colorDetails.displayName) + ",")

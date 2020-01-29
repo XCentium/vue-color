@@ -69,25 +69,35 @@ export default {
       }
     },
     colorDetails () {
-      console.log('this.value.hex', this.value.hex)
-      console.log('this.pick', this.pick)
+      // console.log('this.value.hex', this.value.hex)
+      // console.log('this.pick', this.pick)
       let colorToFind
 
       if (this.hoveredColor) {
+        console.log('this.hoveredColor exists:', this.hoveredColor)
         colorToFind = this.hoveredColor
         if (this.flexColorSettings) {
+          console.log('inside hoveredColor flexColorSettings if check')
+          console.log('this.flexColorSettings.findIndex(object => object.value === colorToFind)', this.flexColorSettings.findIndex(object => object.value === colorToFind))
+          console.log('value in color object:', this.flexColorSettings.findIndex(object => object.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value === colorToFind)].value : 'Not Found')
+
           return this.flexColorSettings.findIndex(object => object.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
-          // return this.findFlexColorObject(colorToFind, this.flexColorSettings)
         }
+        console.log('this.flexColorSettings does not exist, could not find color name.')
         return { displayName: '', value: this.hoveredColor }
       }
 
       if (this.pick) {
+        console.log('this.pick exists:', this.pick)
         colorToFind = this.pick
         if (this.flexColorSettings) {
+          console.log('inside pick flexColorSettings if check')
+          console.log('this.flexColorSettings.findIndex(object => object.value === colorToFind)', this.flexColorSettings.findIndex(object => object.value === colorToFind))
+          console.log('value in color object:', this.flexColorSettings.findIndex(object => object.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value === colorToFind)].value : 'Not Found')
+
           return this.flexColorSettings.findIndex(object => object.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
-          // return this.findFlexColorObject(colorToFind, this.flexColorSettings)
         }
+        console.log('this.flexColorSettings does not exist, could not find color name.')
         return { displayName: '', value: this.pick }
       }
 
@@ -95,7 +105,7 @@ export default {
       //   colorToFind = this.value.hex
       //   return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
       // }
-
+      console.log('this.hoveredColor nor this.pick exists, returning empty values')
       return { displayName: '', value: '' }
       // if (this.flexColorSettings) {
       //   let colorToFind
@@ -149,31 +159,8 @@ export default {
         return data
       }
     },
-    paletteUpperCase (palette, flexColorSettings) {
-      // console.log('flexColorSettings in paletteUpperCase:', flexColorSettings)
-      // if (flexColorSettings instanceof Array) {
-      //   console.log('Inside flexColorSettings if check')
-      //   let flexColorValues = flexColorSettings.map((colorObject) => {
-      //     return colorObject.value
-      //   })
-
-      //   return palette.map((color) => {
-      //     let pos = flexColorValues.indexOf(color.toUpperCase())
-      //     if (pos > -1) {
-      //       return { displayName: flexColorSettings[pos].displayName, value: flexColorSettings[pos].value.toUpperCase() }
-      //     } else if (color.toLowerCase() === 'transparent') {
-      //       return { displayName: 'Transparent', value: 'transparent' }
-      //     } else {
-      //       return { displayName: '', value: '' }
-      //     }
-      //   })
-      // }
+    paletteUpperCase (palette) {
       return palette.map(c => c.toUpperCase())
-    },
-    findFlexColorObject (colorToFind, flexColorObjectsArray) {
-      console.log('flexColorObjectsArray value in findFlexColorObject', flexColorObjectsArray)
-      console.log('flexColorObjectsArray.findIndex(object => object.value === colorToFind)', flexColorObjectsArray.findIndex(object => object.value === colorToFind))
-      flexColorObjectsArray.findIndex(object => object.value === colorToFind) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
     },
     isTransparent (color) {
       return tinycolor(color).getAlpha() === 0
