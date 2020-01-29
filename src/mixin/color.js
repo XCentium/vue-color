@@ -69,65 +69,20 @@ export default {
       }
     },
     colorDetails () {
-      // console.log('this.value.hex', this.value.hex)
-      // console.log('this.pick', this.pick)
       let colorToFind
-
       if (this.hoveredColor) {
-        console.log('this.hoveredColor exists:', this.hoveredColor)
         colorToFind = this.hoveredColor
-        if (this.flexColorSettings) {
-          console.log('inside hoveredColor flexColorSettings if check')
-          console.log('this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())', this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()))
-          console.log('value in color object:', this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : 'Not Found')
-          console.log('#######################')
-
-          return this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : { displayName: '', value: colorToFind }
-        }
-        console.log('this.flexColorSettings does not exist, could not find color name.')
-        return { displayName: '', value: this.hoveredColor }
       }
-
-      if (this.pick) {
-        console.log('this.pick exists:', this.pick)
+      if (this.pick && !this.hoveredColor) {
         colorToFind = this.pick
-        if (this.flexColorSettings) {
-          console.log('inside pick flexColorSettings if check')
-          console.log('this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())', this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()))
-          console.log('value in color object:', this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : 'Not Found')
-          console.log('#######################')
-
-          return this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : { displayName: '', value: colorToFind }
-        }
-        console.log('this.flexColorSettings does not exist, could not find color name.')
-        console.log('#######################')
-        return { displayName: '', value: this.pick }
       }
-
-      // if (this.value.hex && this.flexColorSettings) {
-      //   colorToFind = this.value.hex
-      //   return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
-      // }
-      console.log('this.hoveredColor nor this.pick exists, returning empty values')
+      if (this.flexColorSettings && colorToFind) {
+        return this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : { displayName: '', value: colorToFind }
+      }
+      if (colorToFind) {
+        return { displayName: '', value: colorToFind }
+      }
       return { displayName: '', value: '' }
-      // if (this.flexColorSettings) {
-      //   let colorToFind
-      //   if (this.hoveredColor) {
-      //     colorToFind = this.hoveredColor
-      //   } else if (!this.pick) {
-      //     console.log('this.pick', this.pick)
-      //     return { displayName: '', value: '' }
-      //   } else {
-      //     colorToFind = this.value.hex
-      //   }
-      //   console.log('this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: , value: colorToFind }', this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind })
-
-      //   return this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(colorObject => colorObject.value === colorToFind)] : { displayName: '', value: colorToFind }
-      // }
-      // if (this.value.hex) {
-      //   return { displayName: '', value: this.value.hex }
-      // }
-      // return { displayName: '', value: '' }
     }
   },
   watch: {

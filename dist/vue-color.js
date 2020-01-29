@@ -564,59 +564,22 @@ exports.default = {
     },
     colorDetails: function colorDetails() {
       var colorToFind = void 0;
-
       if (this.hoveredColor) {
-        console.log('this.hoveredColor exists:', this.hoveredColor);
         colorToFind = this.hoveredColor;
-        if (this.flexColorSettings) {
-          console.log('inside hoveredColor flexColorSettings if check');
-          console.log('this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())', this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          }));
-          console.log('value in color object:', this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          })] : 'Not Found');
-          console.log('#######################');
-
-          return this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          })] : { displayName: '', value: colorToFind };
-        }
-        console.log('this.flexColorSettings does not exist, could not find color name.');
-        return { displayName: '', value: this.hoveredColor };
       }
-
-      if (this.pick) {
-        console.log('this.pick exists:', this.pick);
+      if (this.pick && !this.hoveredColor) {
         colorToFind = this.pick;
-        if (this.flexColorSettings) {
-          console.log('inside pick flexColorSettings if check');
-          console.log('this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())', this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          }));
-          console.log('value in color object:', this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          })] : 'Not Found');
-          console.log('#######################');
-
-          return this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-            return object.value.toUpperCase() === colorToFind.toUpperCase();
-          })] : { displayName: '', value: colorToFind };
-        }
-        console.log('this.flexColorSettings does not exist, could not find color name.');
-        console.log('#######################');
-        return { displayName: '', value: this.pick };
       }
-
-      console.log('this.hoveredColor nor this.pick exists, returning empty values');
+      if (this.flexColorSettings && colorToFind) {
+        return this.flexColorSettings.findIndex(function (object) {
+          return object.value.toUpperCase() === colorToFind.toUpperCase();
+        }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
+          return object.value.toUpperCase() === colorToFind.toUpperCase();
+        })] : { displayName: '', value: colorToFind };
+      }
+      if (colorToFind) {
+        return { displayName: '', value: colorToFind };
+      }
       return { displayName: '', value: '' };
     }
   },
@@ -1005,9 +968,9 @@ exports.default = {
     }
   },
   methods: {
-    handlerClick: function handlerClick(color) {
+    handlerClick: function handlerClick(c) {
       this.colorChange({
-        hex: color,
+        hex: c,
         source: 'hex'
       });
     }
@@ -3626,31 +3589,28 @@ var render = function() {
       _c(
         "ul",
         { staticClass: "vc-compact-colors", attrs: { role: "listbox" } },
-        _vm._l(_vm.paletteUpperCase(_vm.palette), function(color) {
+        _vm._l(_vm.paletteUpperCase(_vm.palette), function(c) {
           return _c(
             "li",
             {
-              key: color,
+              key: c,
               staticClass: "vc-compact-color-item",
-              class: {
-                "vc-compact-color-item--white":
-                  color === "#FFFFFF" || color === "transparent"
-              },
-              style: { background: color },
+              class: { "vc-compact-color-item--white": c === "#FFFFFF" },
+              style: { background: c },
               attrs: {
                 role: "option",
-                "aria-label": "color:" + color,
-                "aria-selected": color === _vm.pick
+                "aria-label": "color:" + c,
+                "aria-selected": c === _vm.pick
               },
               on: {
                 mouseover: function($event) {
-                  _vm.hoveredColor = color
+                  _vm.hoveredColor = c
                 },
                 mouseleave: function($event) {
                   _vm.hoveredColor = null
                 },
                 click: function($event) {
-                  _vm.handlerClick(color)
+                  _vm.handlerClick(c)
                 }
               }
             },
@@ -3660,8 +3620,8 @@ var render = function() {
                   {
                     name: "show",
                     rawName: "v-show",
-                    value: color === _vm.pick,
-                    expression: "color === pick"
+                    value: c === _vm.pick,
+                    expression: "c === pick"
                   }
                 ],
                 staticClass: "vc-compact-dot"
@@ -3672,7 +3632,6 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "vc-compact-meta-data" }, [
-        _vm._v("\n    " + _vm._s(_vm.colorDetails) + "\n    "),
         _vm.colorDetails.displayName
           ? _c("span", [
               _vm._v("Name: " + _vm._s(_vm.colorDetails.displayName) + ",")

@@ -2,23 +2,22 @@
   <div role="application" aria-label="Compact color picker" class="vc-compact">
     <ul class="vc-compact-colors" role="listbox">
       <li
-        v-for="color in paletteUpperCase(palette)"
+        v-for="c in paletteUpperCase(palette)"
         role="option"
-        :aria-label="'color:' + color"
-        :aria-selected="color === pick"
+        :aria-label="'color:' + c"
+        :aria-selected="c === pick"
         class="vc-compact-color-item"
-        :key="color"
-        :class="{'vc-compact-color-item--white': color === '#FFFFFF' || color === 'transparent' }"
-        :style="{background: color}"
-        @mouseover="hoveredColor = color"
+        :key="c"
+        :class="{'vc-compact-color-item--white': c === '#FFFFFF'}"
+        :style="{background: c}"
+        @mouseover="hoveredColor = c"
         @mouseleave="hoveredColor = null"
-        @click="handlerClick(color)"
+        @click="handlerClick(c)"
       >
-        <div class="vc-compact-dot" v-show="color === pick"></div>
+        <div class="vc-compact-dot" v-show="c === pick"></div>
       </li>
     </ul>
     <div class="vc-compact-meta-data">
-      {{ colorDetails }}
       <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span>
       <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span>
     </div>
@@ -65,28 +64,16 @@ export default {
   },
   computed: {
     pick () {
-      // console.log('this.colors.hex', this.colors.hex);
       return this.colors.hex.toUpperCase()
     }
   },
   methods: {
-    handlerClick (color) {
+    handlerClick (c) {
       this.colorChange({
-        hex: color,
+        hex: c,
         source: 'hex'
       })
     }
-    // colorsArrayUpperCase () {
-    //   let array = this.paletteUpperCase(this.palette, this.flexColorSettings)
-    //   console.log('colorsArrayUpperCase colors variable:', array)
-    //   if (typeof array[0] === 'string') {
-    //     return array
-    //   } else if (typeof array[0] === 'object') {
-    //     return array.map(() => {
-    //       return array.value
-    //     })
-    //   }
-    // }
   }
 }
 
