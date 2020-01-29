@@ -70,12 +70,14 @@ export default {
     },
     colorDetails () {
       console.log('this.value.hex', this.value.hex)
+      console.log('this.pick', this.pick)
       let colorToFind
 
       if (this.hoveredColor) {
         colorToFind = this.hoveredColor
         if (this.flexColorSettings) {
-          return this.findFlexColorObject(colorToFind, this.flexColorSettings)
+          return this.flexColorSettings.findIndex(object => object.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
+          // return this.findFlexColorObject(colorToFind, this.flexColorSettings)
         }
         return { displayName: '', value: this.hoveredColor }
       }
@@ -83,7 +85,8 @@ export default {
       if (this.pick) {
         colorToFind = this.pick
         if (this.flexColorSettings) {
-          return this.findFlexColorObject(colorToFind, this.flexColorSettings)
+          return this.flexColorSettings.findIndex(object => object.value === colorToFind) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
+          // return this.findFlexColorObject(colorToFind, this.flexColorSettings)
         }
         return { displayName: '', value: this.pick }
       }
@@ -112,9 +115,6 @@ export default {
       //   return { displayName: '', value: this.value.hex }
       // }
       // return { displayName: '', value: '' }
-    },
-    findFlexColorObject (colorToFind, flexColorObjectsArray) {
-      flexColorObjectsArray.findIndex(object => object.value === colorToFind) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
     }
   },
   watch: {
@@ -169,6 +169,11 @@ export default {
       //   })
       // }
       return palette.map(c => c.toUpperCase())
+    },
+    findFlexColorObject (colorToFind, flexColorObjectsArray) {
+      console.log('flexColorObjectsArray value in findFlexColorObject', flexColorObjectsArray)
+      console.log('flexColorObjectsArray.findIndex(object => object.value === colorToFind)', flexColorObjectsArray.findIndex(object => object.value === colorToFind))
+      flexColorObjectsArray.findIndex(object => object.value === colorToFind) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(object => object.value === colorToFind)] : { displayName: '', value: colorToFind }
     },
     isTransparent (color) {
       return tinycolor(color).getAlpha() === 0

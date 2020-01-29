@@ -564,12 +564,17 @@ exports.default = {
     },
     colorDetails: function colorDetails() {
       console.log('this.value.hex', this.value.hex);
+      console.log('this.pick', this.pick);
       var colorToFind = void 0;
 
       if (this.hoveredColor) {
         colorToFind = this.hoveredColor;
         if (this.flexColorSettings) {
-          return this.findFlexColorObject(colorToFind, this.flexColorSettings);
+          return this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          })] : { displayName: '', value: colorToFind };
         }
         return { displayName: '', value: this.hoveredColor };
       }
@@ -577,19 +582,16 @@ exports.default = {
       if (this.pick) {
         colorToFind = this.pick;
         if (this.flexColorSettings) {
-          return this.findFlexColorObject(colorToFind, this.flexColorSettings);
+          return this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
+            return object.value === colorToFind;
+          })] : { displayName: '', value: colorToFind };
         }
         return { displayName: '', value: this.pick };
       }
 
       return { displayName: '', value: '' };
-    },
-    findFlexColorObject: function findFlexColorObject(colorToFind, flexColorObjectsArray) {
-      flexColorObjectsArray.findIndex(function (object) {
-        return object.value === colorToFind;
-      }) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(function (object) {
-        return object.value === colorToFind;
-      })] : { displayName: '', value: colorToFind };
     }
   },
   watch: {
@@ -628,6 +630,17 @@ exports.default = {
       return palette.map(function (c) {
         return c.toUpperCase();
       });
+    },
+    findFlexColorObject: function findFlexColorObject(colorToFind, flexColorObjectsArray) {
+      console.log('flexColorObjectsArray value in findFlexColorObject', flexColorObjectsArray);
+      console.log('flexColorObjectsArray.findIndex(object => object.value === colorToFind)', flexColorObjectsArray.findIndex(function (object) {
+        return object.value === colorToFind;
+      }));
+      flexColorObjectsArray.findIndex(function (object) {
+        return object.value === colorToFind;
+      }) > -1 ? flexColorObjectsArray[flexColorObjectsArray.findIndex(function (object) {
+        return object.value === colorToFind;
+      })] : { displayName: '', value: colorToFind };
     },
     isTransparent: function isTransparent(color) {
       return (0, _tinycolor2.default)(color).getAlpha() === 0;
