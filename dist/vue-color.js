@@ -563,24 +563,7 @@ exports.default = {
       }
     },
     colorDetails: function colorDetails() {
-      var colorToFind = void 0;
-      if (this.hoveredColor) {
-        colorToFind = this.hoveredColor;
-      }
-      if (this.pick && !this.hoveredColor) {
-        colorToFind = this.pick;
-      }
-      if (this.flexColorSettings && colorToFind) {
-        return this.flexColorSettings.findIndex(function (object) {
-          return object.value.toUpperCase() === colorToFind.toUpperCase();
-        }) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(function (object) {
-          return object.value.toUpperCase() === colorToFind.toUpperCase();
-        })] : { displayName: '', value: colorToFind };
-      }
-      if (colorToFind) {
-        return { displayName: '', value: colorToFind };
-      }
-      return { displayName: '', value: '' };
+      return this.flexColorSettings;
     }
   },
   watch: {
@@ -622,6 +605,16 @@ exports.default = {
     },
     isTransparent: function isTransparent(color) {
       return (0, _tinycolor2.default)(color).getAlpha() === 0;
+    },
+    getColorName: function getColorName(color, colorDetails) {
+      if (colorDetails) {
+        return colorDetails.findIndex(function (colorObject) {
+          return colorObject.value.toUpperCase() === color.toUpperCase();
+        }) > -1 ? colorDetails[colorDetails.findIndex(function (colorObject) {
+          return colorObject.value.toUpperCase() === color.toUpperCase();
+        })].displayName : 'No Color Name';
+      }
+      return 'No Color Details';
     }
   }
 };
@@ -949,10 +942,11 @@ exports.default = {
         return defaultColors;
       }
     },
-    bigSwatchStyles: {
+    listLayout: {
       type: Boolean,
-      default: true
+      default: false
     },
+
     flexColorSettings: {
       type: Array
     }
@@ -2239,7 +2233,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.vc-compact {\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact.big-swatch-styles {\r\n  width: 217px;\n}\n.vc-compact-colors {\r\n  overflow: hidden;\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\n.vc-compact-color-item.big-swatch-styles {\r\n  width: 26px;\r\n  height: 26px;\n}\n.vc-compact-color-item--white {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-dot.big-swatch-styles {\r\n  top: 8px;\r\n  right: 8px;\r\n  bottom: 8px;\r\n  left: 8px;\n}\n.vc-compact-meta-data {\r\n  min-height: 17px;\r\n  font-size: .8rem\n}\r\n", ""]);
+exports.push([module.i, "\n.vc-compact {\r\n  overflow: hidden;\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact.list-layout {\r\n  height: 340px;\r\n  overflow-y: auto;\r\n  padding-bottom: 5px;\n}\r\n/* .vc-compact.big-swatch-styles {\r\n  width: 217px;\r\n} */\n.vc-compact-colors {\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-colors.list-layout {\r\n  overflow-y: auto;\n}\n.vc-compact-list-layout-item-container {\r\n  list-style: none;\r\n  cursor: pointer;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n  margin-bottom: 5px;\n}\r\n/* .vc-compact-list-layout-item-container:first-of-type .vc-compact-list-layout-color-item {\r\n  margin-top: 0px;\r\n} */\n.vc-compact-list-layout-item-container:last-of-type {\r\n  margin-bottom: 0px;\n}\n.vc-compact-list-layout-color-item {\r\n  display: inline-block;\r\n  width: 40px;\r\n  min-width: 40px;\r\n  height: 24px;\r\n  margin-right: 5px;\r\n  position: relative;\r\n  vertical-align: middle;\n}\n.vc-compact-color-label {\r\n  /* height: 24px; */\r\n  vertical-align: middle;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\r\n/* .vc-compact-color-item.big-swatch-styles {\r\n  width: 26px;\r\n  height: 26px;\r\n} */\n.vc-compact-color-item--white {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-dot.list-layout {\r\n  width: 10px;\r\n  height: 10px;\r\n  top: 50%;\r\n  right: unset;\r\n  bottom: unset;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\n}\r\n/* .vc-compact-dot.big-swatch-styles {\r\n  top: 8px;\r\n  right: 8px;\r\n  bottom: 8px;\r\n  left: 8px;\r\n} */\r\n\r\n/* .vc-compact-meta-data {\r\n  min-height: 17px;\r\n  font-size: .8rem\r\n} */\r\n", ""]);
 
 // exports
 
@@ -3587,71 +3581,134 @@ var render = function() {
     "div",
     {
       staticClass: "vc-compact",
-      class: { "big-swatch-styles": _vm.bigSwatchStyles },
+      class: {
+        "big-swatch-styles": _vm.bigSwatchStyles,
+        "list-layout": _vm.listLayout
+      },
       attrs: { role: "application", "aria-label": "Compact color picker" }
     },
     [
-      _c(
-        "ul",
-        { staticClass: "vc-compact-colors", attrs: { role: "listbox" } },
-        _vm._l(_vm.paletteUpperCase(_vm.palette), function(c) {
-          return _c(
-            "li",
-            {
-              key: c,
-              staticClass: "vc-compact-color-item",
-              class: {
-                "vc-compact-color-item--white": c === "#FFFFFF",
-                "big-swatch-styles": _vm.bigSwatchStyles
-              },
-              style: { background: c },
-              attrs: {
-                role: "option",
-                "aria-label": "color:" + c,
-                "aria-selected": c === _vm.pick
-              },
-              on: {
-                mouseover: function($event) {
-                  _vm.hoveredColor = c
-                },
-                mouseleave: function($event) {
-                  _vm.hoveredColor = null
-                },
-                click: function($event) {
-                  _vm.handlerClick(c)
-                }
-              }
-            },
-            [
-              _c("div", {
-                directives: [
+      _vm.listLayout
+        ? [
+            _c(
+              "ul",
+              { staticClass: "vc-compact-colors", attrs: { role: "listbox" } },
+              _vm._l(_vm.paletteUpperCase(_vm.palette), function(c) {
+                return _c(
+                  "li",
                   {
-                    name: "show",
-                    rawName: "v-show",
-                    value: c === _vm.pick,
-                    expression: "c === pick"
-                  }
-                ],
-                staticClass: "vc-compact-dot",
-                class: { "big-swatch-styles": _vm.bigSwatchStyles }
+                    key: c,
+                    staticClass: "vc-compact-list-layout-item-container",
+                    attrs: {
+                      role: "option",
+                      "aria-label": "color:" + c,
+                      "aria-selected": c === _vm.pick
+                    },
+                    on: {
+                      mouseover: function($event) {
+                        _vm.hoveredColor = c
+                      },
+                      mouseleave: function($event) {
+                        _vm.hoveredColor = null
+                      },
+                      click: function($event) {
+                        _vm.handlerClick(c)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "vc-compact-list-layout-color-item",
+                        class: {
+                          "vc-compact-color-item--white": c === "#FFFFFF"
+                        },
+                        style: { background: c }
+                      },
+                      [
+                        _c("div", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: c === _vm.pick,
+                              expression: "c === pick"
+                            }
+                          ],
+                          staticClass: "vc-compact-dot",
+                          class: { "list-layout": _vm.listLayout }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "vc-compact-color-label",
+                      domProps: {
+                        innerHTML: _vm._s(_vm.getColorName(c, _vm.colorDetails))
+                      }
+                    })
+                  ]
+                )
               })
-            ]
-          )
-        })
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "vc-compact-meta-data" }, [
-        _vm.colorDetails.displayName
-          ? _c("span", [
-              _vm._v("Name: " + _vm._s(_vm.colorDetails.displayName) + ",")
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.colorDetails.value
-          ? _c("span", [_vm._v("Value: " + _vm._s(_vm.colorDetails.value))])
-          : _vm._e()
-      ])
-    ]
+            )
+          ]
+        : [
+            _c(
+              "ul",
+              {
+                staticClass: "vc-compact-colors",
+                class: { "list-layout": _vm.listLayout },
+                attrs: { role: "listbox" }
+              },
+              _vm._l(_vm.paletteUpperCase(_vm.palette), function(c) {
+                return _c(
+                  "li",
+                  {
+                    key: c,
+                    staticClass: "vc-compact-color-item",
+                    class: {
+                      "vc-compact-color-item--white": c === "#FFFFFF",
+                      "big-swatch-styles": _vm.bigSwatchStyles
+                    },
+                    style: { background: c },
+                    attrs: {
+                      role: "option",
+                      "aria-label": "color:" + c,
+                      "aria-selected": c === _vm.pick
+                    },
+                    on: {
+                      mouseover: function($event) {
+                        _vm.hoveredColor = c
+                      },
+                      mouseleave: function($event) {
+                        _vm.hoveredColor = null
+                      },
+                      click: function($event) {
+                        _vm.handlerClick(c)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: c === _vm.pick,
+                          expression: "c === pick"
+                        }
+                      ],
+                      staticClass: "vc-compact-dot",
+                      class: { "big-swatch-styles": _vm.bigSwatchStyles }
+                    })
+                  ]
+                )
+              })
+            )
+          ]
+    ],
+    2
   )
 }
 var staticRenderFns = []

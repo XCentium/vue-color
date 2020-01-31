@@ -69,20 +69,21 @@ export default {
       }
     },
     colorDetails () {
-      let colorToFind
-      if (this.hoveredColor) {
-        colorToFind = this.hoveredColor
-      }
-      if (this.pick && !this.hoveredColor) {
-        colorToFind = this.pick
-      }
-      if (this.flexColorSettings && colorToFind) {
-        return this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : { displayName: '', value: colorToFind }
-      }
-      if (colorToFind) {
-        return { displayName: '', value: colorToFind }
-      }
-      return { displayName: '', value: '' }
+      return this.flexColorSettings
+      // let colorToFind
+      // if (this.hoveredColor) {
+      //   colorToFind = this.hoveredColor
+      // }
+      // if (this.pick && !this.hoveredColor) {
+      //   colorToFind = this.pick
+      // }
+      // if (this.flexColorSettings && colorToFind) {
+      //   return this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : { displayName: '', value: colorToFind }
+      // }
+      // if (colorToFind) {
+      //   return { displayName: '', value: colorToFind }
+      // }
+      // return { displayName: '', value: '' }
     }
   },
   watch: {
@@ -122,6 +123,18 @@ export default {
     },
     isTransparent (color) {
       return tinycolor(color).getAlpha() === 0
+    },
+    getColorName (color, colorDetails) {
+      if (colorDetails) {
+        return colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase()) > -1 ? colorDetails[colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase())].displayName : 'No Color Name'
+      }
+      return 'No Color Details'
+
+      // let colorIndexToFind = colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase())
+      // if (colorIndexToFind > -1) {
+      //   return colorDetails[colorIndexToFind].displayName
+      // }
+      // return 'No Color Name'
     }
   }
 }
