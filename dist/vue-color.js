@@ -3660,7 +3660,7 @@ var render = function() {
                     _c(
                       "li",
                       {
-                        key: c,
+                        key: c + "-label",
                         staticClass: "vc-compact-list-layout-tooltip-container",
                         attrs: { "aria-hidden": "" }
                       },

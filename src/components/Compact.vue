@@ -22,7 +22,7 @@
             </div>
             <span class="vc-compact-color-label" v-html="getColorName(c, colorDetails)"></span>
           </li>
-          <li class="vc-compact-list-layout-tooltip-container" :key="c" aria-hidden>
+          <li class="vc-compact-list-layout-tooltip-container" :key="c + '-label'" aria-hidden>
             <span class="vc-compact-list-layout-tooltip" v-html="c"></span>
           </li>
         </template>
