@@ -2,27 +2,30 @@
   <div role="application" aria-label="Compact color picker" class="vc-compact" :class="{'big-swatch-styles': bigSwatchStyles, 'list-layout': listLayout}">
     <template v-if="listLayout">
       <ul class="vc-compact-colors" role="listbox">
-        <li
-          v-for="c in paletteUpperCase(palette)"
-          role="option"
-          :aria-label="'color:' + c"
-          :aria-selected="c === pick"
-          class="vc-compact-list-layout-item-container"
-          :key="c"
-          @mouseover="hoveredColor = c"
-          @mouseleave="hoveredColor = null"
-          @click="handlerClick(c)"
-        >
-          <div
-            :style="{background: c}"
-            class="vc-compact-list-layout-color-item"
-            :class="{'vc-compact-color-item--white': c === '#FFFFFF'}"
+        <template v-for="c in paletteUpperCase(palette)">
+          <li
+            role="option"
+            :aria-label="'color:' + c"
+            :aria-selected="c === pick"
+            class="vc-compact-list-layout-item-container"
+            :key="c"
+            @mouseover="hoveredColor = c"
+            @mouseleave="hoveredColor = null"
+            @click="handlerClick(c)"
           >
-            <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick"></div>
-            <span class="vc-compact-list-layout-tooltip" v-html="c" aria-hidden></span>
-          </div>
-          <span class="vc-compact-color-label" v-html="getColorName(c, colorDetails)"></span>
-        </li>
+            <div
+              :style="{background: c}"
+              class="vc-compact-list-layout-color-item"
+              :class="{'vc-compact-color-item--white': c === '#FFFFFF'}"
+            >
+              <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick"></div>
+            </div>
+            <span class="vc-compact-color-label" v-html="getColorName(c, colorDetails)"></span>
+          </li>
+          <li class="vc-compact-list-layout-tooltip-container" :key="c" aria-hidden>
+            <span class="vc-compact-list-layout-tooltip" v-html="c"></span>
+          </li>
+        </template>
       </ul>
     </template>
 
@@ -143,10 +146,6 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 5px;
-
-}
-.vc-compact-list-layout-item-container:last-of-type {
-  margin-bottom: 0px;
 }
 .vc-compact-list-layout-color-item {
   display: inline-block;
@@ -180,19 +179,25 @@ export default {
 .vc-compact-color-item--white .vc-compact-dot {
   background: #000;
 }
-.vc-compact-list-layout-tooltip {
+.vc-compact-list-layout-tooltip-container {
   opacity: 0;
+  height: 0;
+  position: relative;
+  transition: opacity .5s;
+  pointer-events: none;
+}
+.vc-compact-list-layout-item-container:hover + .vc-compact-list-layout-tooltip-container {
+  opacity: 1;
+}
+.vc-compact-list-layout-tooltip {
   background-color: #fff;
   border: 1px solid #000;
   padding: 2px;
   font-size: .7rem;
-  top: 3px;
-  left: 2px;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
   position: absolute;
-  transition: opacity .5s;
-}
-.vc-compact-list-layout-item-container:hover .vc-compact-list-layout-tooltip {
-  opacity: 1;
 }
 .vc-compact-dot {
   position: absolute;

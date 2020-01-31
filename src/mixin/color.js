@@ -112,15 +112,10 @@ export default {
     },
     getColorName (color, colorDetails) {
       if (colorDetails) {
-        return colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase()) > -1 ? colorDetails[colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase())].displayName : 'No Color Name'
+        let colorIndex = colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase())
+        return colorIndex > -1 ? colorDetails[colorIndex].displayName : 'No Color Name'
       }
       return 'No Color Details'
-
-      // let colorIndexToFind = colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase())
-      // if (colorIndexToFind > -1) {
-      //   return colorDetails[colorIndexToFind].displayName
-      // }
-      // return 'No Color Name'
     }
   }
 }
