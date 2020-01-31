@@ -95,10 +95,10 @@ export default {
       type: Boolean,
       default: false
     },
-    // bigSwatchStyles: {
-    //   type: Boolean,
-    //   default: true
-    // },
+    bigSwatchStyles: {
+      type: Boolean,
+      default: false
+    },
     flexColorSettings: {
       type: Array
       // default () {
@@ -146,9 +146,9 @@ export default {
   overflow-y: auto;
   padding-bottom: 5px;
 }
-/* .vc-compact.big-swatch-styles {
+.vc-compact.big-swatch-styles {
   width: 217px;
-} */
+}
 .vc-compact-colors {
   padding: 0;
   margin: 0;
@@ -164,9 +164,6 @@ export default {
   text-overflow: ellipsis;
   margin-bottom: 5px;
 }
-/* .vc-compact-list-layout-item-container:first-of-type .vc-compact-list-layout-color-item {
-  margin-top: 0px;
-} */
 .vc-compact-list-layout-item-container:last-of-type {
   margin-bottom: 0px;
 }
@@ -179,9 +176,7 @@ export default {
   position: relative;
   vertical-align: middle;
 }
-
 .vc-compact-color-label {
-  /* height: 24px; */
   vertical-align: middle;
 }
 .vc-compact-color-item {
@@ -194,10 +189,10 @@ export default {
   position: relative;
   cursor: pointer;
 }
-/* .vc-compact-color-item.big-swatch-styles {
+.vc-compact-color-item.big-swatch-styles {
   width: 26px;
   height: 26px;
-} */
+}
 .vc-compact-color-item--white {
   box-shadow: inset 0 0 0 1px #ddd;
 }
@@ -223,13 +218,12 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* .vc-compact-dot.big-swatch-styles {
+.vc-compact-dot.big-swatch-styles {
   top: 8px;
   right: 8px;
   bottom: 8px;
   left: 8px;
-} */
-
+}
 /* .vc-compact-meta-data {
   min-height: 17px;
   font-size: .8rem
