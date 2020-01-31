@@ -19,6 +19,7 @@
             :class="{'vc-compact-color-item--white': c === '#FFFFFF'}"
           >
             <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick"></div>
+            <span class="vc-compact-list-layout-tooltip" v-html="c" aria-hidden></span>
           </div>
           <span class="vc-compact-color-label" v-html="getColorName(c, colorDetails)"></span>
         </li>
@@ -44,27 +45,6 @@
         </li>
       </ul>
     </template>
-    <!-- <ul class="vc-compact-colors" role="listbox">
-      <li
-        v-for="c in paletteUpperCase(palette)"
-        role="option"
-        :aria-label="'color:' + c"
-        :aria-selected="c === pick"
-        class="vc-compact-color-item"
-        :key="c"
-        :class="{'vc-compact-color-item--white': c === '#FFFFFF', 'big-swatch-styles': bigSwatchStyles}"
-        :style="{background: c}"
-        @mouseover="hoveredColor = c"
-        @mouseleave="hoveredColor = null"
-        @click="handlerClick(c)"
-      >
-        <div class="vc-compact-dot" :class="{'big-swatch-styles': bigSwatchStyles}" v-show="c === pick"></div>
-      </li>
-    </ul> -->
-    <!-- <div class="vc-compact-meta-data">
-      <span v-if="colorDetails.displayName">Name: {{ colorDetails.displayName }},</span>
-      <span v-if="colorDetails.value">Value: {{ colorDetails.value }}</span>
-    </div> -->
   </div>
 </template>
 
@@ -102,7 +82,7 @@ export default {
     flexColorSettings: {
       type: Array
       // default () {
-      //   return [{"displayName":"Color-1 100","name":"bc-1","value":"#283C48"},{"displayName":"Color-1 200","name":"bc-2","value":"#005773"},{"displayName":"Color-1 300","name":"bc-3","value":"#6399AB"},{"displayName":"Color-1 400","name":"bc-4","value":"#C85228"},{"displayName":"Color-1 500","name":"bc-5","value":"#75C0BF"},{"displayName":"Color-2 100","name":"bc-6","value":"#9CCA96"},{"displayName":"Color-2 200","name":"bc-7","value":"#FFFFFF"},{"displayName":"Color-2 300","name":"bc-8","value":"#3A3A44"},{"displayName":"Color-2 400","name":"bc-9","value":"#42424D"},{"displayName":"Color-2 500","name":"bc-10","value":"#656576"},{"displayName":"Color-3 100","name":"bc-11","value":"#75758B"},{"displayName":"Color-3 200","name":"bc-12","value":"#B7B7C1"},{"displayName":"Color-3 300","name":"bc-13","value":"#C4C4CC"},{"displayName":"Color-3 400","name":"bc-14","value":"#DEDEDE"},{"displayName":"Red Orange Orange","name":"bc-15","value":"#F44E3B"},{"displayName":"Orange","name":"bc-16","value":"#FE9200"},{"displayName":"Color-4 200","name":"bc-17","value":"#FFFFFF"},{"displayName":"Color-4 300","name":"bc-18","value":"#FFFFFF"},{"displayName":"Color-4 400","name":"bc-19","value":"#FFFFFF"},{"displayName":"Color-4 500","name":"bc-20","value":"#FFFFFF"},{"displayName":"Color-5 100","name":"bc-21","value":"#FFFFFF"},{"displayName":"Color-5 200","name":"bc-22","value":"#FFFFFF"},{"displayName":"Color-5 300","name":"bc-23","value":"#FFFFFF"},{"displayName":"Color-5 400","name":"bc-24","value":"#FFFFFF"},{"displayName":"Color-5 500","name":"bc-25","value":"#FFFFFF"},{"displayName":"Color-6 100","name":"bc-26","value":"#FFFFFF"},{"displayName":"Color-6 200","name":"bc-27","value":"#FFFFFF"},{"displayName":"Color-6 300","name":"bc-28","value":"#FFFFFF"},{"displayName":"Color-6 400","name":"bc-29","value":"#FF0000"},{"displayName":"Color-6 500","name":"bc-30","value":"#00FF00"},{"displayName":"Color-7 100","name":"bc-31","value":"#000000"},{"displayName":"Color-7 200","name":"bc-32","value":"#FFFFFF"},{"displayName":"Color-7 300","name":"bc-33","value":"#FFFFFF"},{"displayName":"Color-7 400","name":"bc-34","value":"#FFFFFF"},{"displayName":"Color-7 500","name":"bc-35","value":"#FFFFFF"}]
+      //   return [{"displayName":"Color-1 100","name":"bc-1","value":"#283C48"},{"displayName":"Color-1 200","name":"bc-2","value":"#005773"},{"displayName":"Color-1 300","name":"bc-3","value":"#6399AB"},{"displayName":"Color-1 400","name":"bc-4","value":"#C85228"},{"displayName":"Color-1 500","name":"bc-5","value":"#75C0BF"},{"displayName":"Color-2 100","name":"bc-6","value":"#9CCA96"},{"displayName":"Color-2 200","name":"bc-7","value":"#FFFFFF"},{"displayName":"Color-2 300","name":"bc-8","value":"#3A3A44"},{"displayName":"Color-2 400","name":"bc-9","value":"#42424D"},{"displayName":"Color-2 500","name":"bc-10","value":"#656576"},{"displayName":"Color-3 100","name":"bc-11","value":"#75758B"},{"displayName":"Color-3 200","name":"bc-12","value":"#B7B7C1"},{"displayName":"Color-3 300","name":"bc-13","value":"#C4C4CC"},{"displayName":"Color-3 400","name":"bc-14","value":"#DEDEDE"},{"displayName":"Red Orange Super Long Name","name":"bc-15","value":"#F44E3B"},{"displayName":"Orange","name":"bc-16","value":"#FE9200"},{"displayName":"Color-4 200","name":"bc-17","value":"#FFFFFF"},{"displayName":"Color-4 300","name":"bc-18","value":"#FFFFFF"},{"displayName":"Color-4 400","name":"bc-19","value":"#FFFFFF"},{"displayName":"Color-4 500","name":"bc-20","value":"#FFFFFF"},{"displayName":"Color-5 100","name":"bc-21","value":"#FFFFFF"},{"displayName":"Color-5 200","name":"bc-22","value":"#FFFFFF"},{"displayName":"Color-5 300","name":"bc-23","value":"#FFFFFF"},{"displayName":"Color-5 400","name":"bc-24","value":"#FFFFFF"},{"displayName":"Color-5 500","name":"bc-25","value":"#FFFFFF"},{"displayName":"Color-6 100","name":"bc-26","value":"#FFFFFF"},{"displayName":"Color-6 200","name":"bc-27","value":"#FFFFFF"},{"displayName":"Color-6 300","name":"bc-28","value":"#FFFFFF"},{"displayName":"Color-6 400","name":"bc-29","value":"#FF0000"},{"displayName":"Color-6 500","name":"bc-30","value":"#00FF00"},{"displayName":"Color-7 100","name":"bc-31","value":"#000000"},{"displayName":"Color-7 200","name":"bc-32","value":"#FFFFFF"},{"displayName":"Color-7 300","name":"bc-33","value":"#FFFFFF"},{"displayName":"Color-7 400","name":"bc-34","value":"#FFFFFF"},{"displayName":"Color-7 500","name":"bc-35","value":"#FFFFFF"}]
       // }
     }
   },
@@ -163,6 +143,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 5px;
+
 }
 .vc-compact-list-layout-item-container:last-of-type {
   margin-bottom: 0px;
@@ -199,6 +180,20 @@ export default {
 .vc-compact-color-item--white .vc-compact-dot {
   background: #000;
 }
+.vc-compact-list-layout-tooltip {
+  opacity: 0;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 2px;
+  font-size: .7rem;
+  top: 3px;
+  left: 2px;
+  position: absolute;
+  transition: opacity .5s;
+}
+.vc-compact-list-layout-item-container:hover .vc-compact-list-layout-tooltip {
+  opacity: 1;
+}
 .vc-compact-dot {
   position: absolute;
   top: 5px;
@@ -224,8 +219,4 @@ export default {
   bottom: 8px;
   left: 8px;
 }
-/* .vc-compact-meta-data {
-  min-height: 17px;
-  font-size: .8rem
-} */
 </style>

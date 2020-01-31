@@ -70,20 +70,6 @@ export default {
     },
     colorDetails () {
       return this.flexColorSettings
-      // let colorToFind
-      // if (this.hoveredColor) {
-      //   colorToFind = this.hoveredColor
-      // }
-      // if (this.pick && !this.hoveredColor) {
-      //   colorToFind = this.pick
-      // }
-      // if (this.flexColorSettings && colorToFind) {
-      //   return this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase()) > -1 ? this.flexColorSettings[this.flexColorSettings.findIndex(object => object.value.toUpperCase() === colorToFind.toUpperCase())] : { displayName: '', value: colorToFind }
-      // }
-      // if (colorToFind) {
-      //   return { displayName: '', value: colorToFind }
-      // }
-      // return { displayName: '', value: '' }
     }
   },
   watch: {
