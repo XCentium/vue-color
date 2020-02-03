@@ -5,6 +5,7 @@
           v-if="showNoColor"
           role="option"
           :aria-label="'No Color'"
+          :aria-selected="colors.nocolor"
           class="vc-compact-list-layout-item-container"
           @click="handlerClick('00000000')"
         >
@@ -19,6 +20,7 @@
           v-if="showTransparent"
           role="option"
           :aria-label="'Transparent'"
+          :aria-selected="colors.a === 0 && !colors.nocolor"
           class="vc-compact-list-layout-item-container"
           @click="handlerClick('FFFFFF00')"
         >
@@ -188,9 +190,9 @@ export default {
 }
 .vc-compact-list-layout-color-item--no-color {
   background: linear-gradient(-30deg,
-  rgba(255, 255, 255, 1) calc(50% - 1px),
+  rgba(255, 255, 255, 1) calc(50% - 2px),
   rgba(255,0,0,1) calc(50%),
-  rgba(255, 255, 255, 1) calc(50% + 1px));
+  rgba(255, 255, 255, 1) calc(50% + 2px));
 }
 .vc-compact-color-label {
   vertical-align: middle;

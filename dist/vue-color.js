@@ -512,7 +512,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _colorChange(data, oldHue) {
   var alpha = data && data.a;
   var color;
-  var nocolor = data.hex === '00000000';
+  var nocolor = data.hex8 === '#00000000';
 
   if (data && data.hsl) {
     color = (0, _tinycolor2.default)(data.hsl);
@@ -2244,7 +2244,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.vc-compact {\r\n  overflow: hidden;\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact.list-layout {\r\n  height: 340px;\r\n  overflow-y: auto;\r\n  padding-bottom: 5px;\n}\n.vc-compact.big-swatch-styles {\r\n  width: 217px;\n}\n.vc-compact-colors {\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-colors.list-layout {\r\n  overflow-y: auto;\n}\n.vc-compact-list-layout-item-container {\r\n  list-style: none;\r\n  cursor: pointer;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n  margin-bottom: 5px;\n}\n.vc-compact-list-layout-color-item {\r\n  display: inline-block;\r\n  width: 40px;\r\n  min-width: 40px;\r\n  height: 24px;\r\n  margin-right: 5px;\r\n  position: relative;\r\n  vertical-align: middle;\n}\n.vc-compact-list-layout-color-item--no-color {\r\n  background: linear-gradient(-30deg,\r\n  rgba(255, 255, 255, 1) calc(50% - 1px),\r\n  rgba(255,0,0,1) calc(50%),\r\n  rgba(255, 255, 255, 1) calc(50% + 1px));\n}\n.vc-compact-color-label {\r\n  vertical-align: middle;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\n.vc-compact-color-item.big-swatch-styles {\r\n  width: 26px;\r\n  height: 26px;\n}\n.vc-compact-color-item--white, .vc-checkerboard {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-checkerboard {\r\n  background-size: auto;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-list-layout-tooltip-container {\r\n  opacity: 0;\r\n  height: 0;\r\n  position: relative;\r\n  transition: opacity .5s;\r\n  pointer-events: none;\n}\n.vc-compact-list-layout-item-container:hover + .vc-compact-list-layout-tooltip-container {\r\n  opacity: 1;\n}\n.vc-compact-list-layout-tooltip {\r\n  background-color: #fff;\r\n  border: 1px solid #000;\r\n  padding: 2px;\r\n  font-size: .7rem;\r\n  top: -8px;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n  position: absolute;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-dot.list-layout {\r\n  width: 10px;\r\n  height: 10px;\r\n  top: 50%;\r\n  right: unset;\r\n  bottom: unset;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\n}\n.vc-compact-dot.big-swatch-styles {\r\n  top: 8px;\r\n  right: 8px;\r\n  bottom: 8px;\r\n  left: 8px;\n}\r\n", ""]);
+exports.push([module.i, "\n.vc-compact {\r\n  overflow: hidden;\r\n  padding-top: 5px;\r\n  padding-left: 5px;\r\n  width: 240px;\r\n  border-radius: 2px;\r\n  box-shadow: 0 2px 10px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.16);\r\n  background-color: #fff;\n}\n.vc-compact.list-layout {\r\n  height: 340px;\r\n  overflow-y: auto;\r\n  padding-bottom: 5px;\n}\n.vc-compact.big-swatch-styles {\r\n  width: 217px;\n}\n.vc-compact-colors {\r\n  padding: 0;\r\n  margin: 0;\n}\n.vc-compact-colors.list-layout {\r\n  overflow-y: auto;\n}\n.vc-compact-list-layout-item-container {\r\n  list-style: none;\r\n  cursor: pointer;\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n  margin-bottom: 5px;\n}\n.vc-compact-list-layout-color-item {\r\n  display: inline-block;\r\n  width: 40px;\r\n  min-width: 40px;\r\n  height: 24px;\r\n  margin-right: 5px;\r\n  position: relative;\r\n  vertical-align: middle;\n}\n.vc-compact-list-layout-color-item--no-color {\r\n  background: linear-gradient(-30deg,\r\n  rgba(255, 255, 255, 1) calc(50% - 2px),\r\n  rgba(255,0,0,1) calc(50%),\r\n  rgba(255, 255, 255, 1) calc(50% + 2px));\n}\n.vc-compact-color-label {\r\n  vertical-align: middle;\n}\n.vc-compact-color-item {\r\n  list-style: none;\r\n  width: 15px;\r\n  height: 15px;\r\n  float: left;\r\n  margin-right: 5px;\r\n  margin-bottom: 5px;\r\n  position: relative;\r\n  cursor: pointer;\n}\n.vc-compact-color-item.big-swatch-styles {\r\n  width: 26px;\r\n  height: 26px;\n}\n.vc-compact-color-item--white, .vc-checkerboard {\r\n  box-shadow: inset 0 0 0 1px #ddd;\n}\n.vc-compact-color-item--white .vc-checkerboard {\r\n  background-size: auto;\n}\n.vc-compact-color-item--white .vc-compact-dot {\r\n  background: #000;\n}\n.vc-compact-list-layout-tooltip-container {\r\n  opacity: 0;\r\n  height: 0;\r\n  position: relative;\r\n  transition: opacity .5s;\r\n  pointer-events: none;\n}\n.vc-compact-list-layout-item-container:hover + .vc-compact-list-layout-tooltip-container {\r\n  opacity: 1;\n}\n.vc-compact-list-layout-tooltip {\r\n  background-color: #fff;\r\n  border: 1px solid #000;\r\n  padding: 2px;\r\n  font-size: .7rem;\r\n  top: -8px;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n  position: absolute;\n}\n.vc-compact-dot {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 5px;\r\n  bottom: 5px;\r\n  left: 5px;\r\n  border-radius: 50%;\r\n  opacity: 1;\r\n  background: #fff;\n}\n.vc-compact-dot.list-layout {\r\n  width: 10px;\r\n  height: 10px;\r\n  top: 50%;\r\n  right: unset;\r\n  bottom: unset;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\n}\n.vc-compact-dot.big-swatch-styles {\r\n  top: 8px;\r\n  right: 8px;\r\n  bottom: 8px;\r\n  left: 8px;\n}\r\n", ""]);
 
 // exports
 
@@ -3668,7 +3668,11 @@ var render = function() {
                   "li",
                   {
                     staticClass: "vc-compact-list-layout-item-container",
-                    attrs: { role: "option", "aria-label": "No Color" },
+                    attrs: {
+                      role: "option",
+                      "aria-label": "No Color",
+                      "aria-selected": _vm.colors.nocolor
+                    },
                     on: {
                       click: function($event) {
                         _vm.handlerClick("00000000")
@@ -3709,7 +3713,11 @@ var render = function() {
                   "li",
                   {
                     staticClass: "vc-compact-list-layout-item-container",
-                    attrs: { role: "option", "aria-label": "Transparent" },
+                    attrs: {
+                      role: "option",
+                      "aria-label": "Transparent",
+                      "aria-selected": _vm.colors.a === 0 && !_vm.colors.nocolor
+                    },
                     on: {
                       click: function($event) {
                         _vm.handlerClick("FFFFFF00")
