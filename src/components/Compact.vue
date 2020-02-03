@@ -9,8 +9,6 @@
             :aria-selected="c === pick"
             class="vc-compact-list-layout-item-container"
             :key="c"
-            @mouseover="hoveredColor = c"
-            @mouseleave="hoveredColor = null"
             @click="handlerClick(c)"
           >
             <div
@@ -40,8 +38,6 @@
           :key="c"
           :class="{'vc-compact-color-item--white': c === '#FFFFFF', 'big-swatch-styles': bigSwatchStyles}"
           :style="{background: c}"
-          @mouseover="hoveredColor = c"
-          @mouseleave="hoveredColor = null"
           @click="handlerClick(c)"
         >
           <div class="vc-compact-dot" :class="{'big-swatch-styles': bigSwatchStyles}" v-show="c === pick"></div>
@@ -91,11 +87,6 @@ export default {
   },
   components: {
     'ed-in': editableInput
-  },
-  data () {
-    return {
-      hoveredColor: null
-    }
   },
   computed: {
     pick () {

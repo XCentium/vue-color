@@ -956,12 +956,6 @@ exports.default = {
   components: {
     'ed-in': _EditableInput2.default
   },
-  data: function data() {
-    return {
-      hoveredColor: null
-    };
-  },
-
   computed: {
     pick: function pick() {
       return this.colors.hex.toUpperCase();
@@ -3609,12 +3603,6 @@ var render = function() {
                           "aria-selected": c === _vm.pick
                         },
                         on: {
-                          mouseover: function($event) {
-                            _vm.hoveredColor = c
-                          },
-                          mouseleave: function($event) {
-                            _vm.hoveredColor = null
-                          },
                           click: function($event) {
                             _vm.handlerClick(c)
                           }
@@ -3702,12 +3690,6 @@ var render = function() {
                       "aria-selected": c === _vm.pick
                     },
                     on: {
-                      mouseover: function($event) {
-                        _vm.hoveredColor = c
-                      },
-                      mouseleave: function($event) {
-                        _vm.hoveredColor = null
-                      },
                       click: function($event) {
                         _vm.handlerClick(c)
                       }
