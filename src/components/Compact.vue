@@ -1,6 +1,33 @@
 <template>
   <div role="application" aria-label="Compact color picker" class="vc-compact" :class="{'big-swatch-styles': bigSwatchStyles, 'list-layout': listLayout}">
     <template v-if="listLayout">
+        <li
+          role="option"
+          :aria-label="'No Color'"
+          class="vc-compact-list-layout-item-container"
+          @click="handlerClick('00000000')"
+        >
+          <div
+            class="vc-compact-list-layout-color-item vc-compact-list-layout-color-item--no-color vc-compact-color-item--white"
+          >
+            <div class="vc-compact-dot list-layout" v-show="colors.nocolor"></div>
+          </div>
+            <span class="vc-compact-color-label">No Color</span>
+        </li>
+        <li
+          role="option"
+          :aria-label="'Transparent'"
+          class="vc-compact-list-layout-item-container"
+          @click="handlerClick('FFFFFF00')"
+        >
+          <div
+            class="vc-compact-list-layout-color-item vc-compact-color-item--white"
+          >
+            <checkboard></checkboard>
+            <div class="vc-compact-dot list-layout" v-show="colors.a === 0 && !colors.nocolor"></div>
+          </div>
+            <span class="vc-compact-color-label">Transparent</span>
+        </li>
       <ul class="vc-compact-colors" role="listbox">
         <template v-for="c in paletteUpperCase(palette)">
           <li
@@ -16,7 +43,7 @@
               class="vc-compact-list-layout-color-item"
               :class="{'vc-compact-color-item--white': c === '#FFFFFF'}"
             >
-              <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick"></div>
+              <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick && colors.a !== 0"></div>
             </div>
             <span class="vc-compact-color-label" v-html="getColorName(c, colorDetails)"></span>
           </li>
@@ -50,6 +77,7 @@
 <script>
 import colorMixin from '../mixin/color'
 import editableInput from './common/EditableInput.vue'
+import checkboard from './common/Checkboard.vue'
 
 const defaultColors = [
   '#4D4D4D', '#999999', '#FFFFFF', '#F44E3B', '#FE9200', '#FCDC00',
@@ -72,7 +100,7 @@ export default {
     },
     listLayout: {
       type: Boolean,
-      default: false
+      default: true
     },
     bigSwatchStyles: {
       type: Boolean,
@@ -86,7 +114,8 @@ export default {
     }
   },
   components: {
-    'ed-in': editableInput
+    'ed-in': editableInput,
+    checkboard
   },
   computed: {
     pick () {
@@ -147,6 +176,12 @@ export default {
   position: relative;
   vertical-align: middle;
 }
+.vc-compact-list-layout-color-item--no-color {
+  background: linear-gradient(-30deg,
+  rgba(255, 255, 255, 1) calc(50% - 1px),
+  rgba(255,0,0,1) calc(50%),
+  rgba(255, 255, 255, 1) calc(50% + 1px));
+}
 .vc-compact-color-label {
   vertical-align: middle;
 }
@@ -164,8 +199,11 @@ export default {
   width: 26px;
   height: 26px;
 }
-.vc-compact-color-item--white {
+.vc-compact-color-item--white, .vc-checkerboard {
   box-shadow: inset 0 0 0 1px #ddd;
+}
+.vc-compact-color-item--white .vc-checkerboard {
+  background-size: auto;
 }
 .vc-compact-color-item--white .vc-compact-dot {
   background: #000;

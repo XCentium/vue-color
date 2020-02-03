@@ -3,6 +3,7 @@ import tinycolor from 'tinycolor2'
 function _colorChange (data, oldHue) {
   var alpha = data && data.a
   var color
+  let nocolor = data.hex === '00000000'
 
   // hsl is better than hex between conversions
   if (data && data.hsl) {
@@ -47,7 +48,8 @@ function _colorChange (data, oldHue) {
     hsv: hsv,
     oldHue: data.h || oldHue || hsl.h,
     source: data.source,
-    a: data.a || color.getAlpha()
+    a: data.a || color.getAlpha(),
+    nocolor: nocolor
   }
 }
 
