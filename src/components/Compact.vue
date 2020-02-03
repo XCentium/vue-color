@@ -136,9 +136,11 @@ export default {
   },
   methods: {
     handlerClick (c) {
+      let source = (c.length === 9) ? 'hex8' : 'hex'
+
       this.colorChange({
         hex: c,
-        source: 'hex'
+        source: source
       })
     }
   }

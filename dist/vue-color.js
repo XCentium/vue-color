@@ -510,6 +510,7 @@ var _tinycolor2 = _interopRequireDefault(_tinycolor);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _colorChange(data, oldHue) {
+  console.log('_colorChange data:', data);
   var alpha = data && data.a;
   var color;
   var nocolor = data.hex8 === '#00000000';
@@ -978,9 +979,11 @@ exports.default = {
   },
   methods: {
     handlerClick: function handlerClick(c) {
+      var source = c.length === 9 ? 'hex8' : 'hex';
+
       this.colorChange({
         hex: c,
-        source: 'hex'
+        source: source
       });
     }
   }

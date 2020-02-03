@@ -1,6 +1,7 @@
 import tinycolor from 'tinycolor2'
 
 function _colorChange (data, oldHue) {
+  console.log('_colorChange data:', data)
   var alpha = data && data.a
   var color
   let nocolor = data.hex8 === '#00000000'
