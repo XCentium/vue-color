@@ -949,9 +949,17 @@ exports.default = {
     },
     listLayout: {
       type: Boolean,
-      default: true
+      default: false
     },
     bigSwatchStyles: {
+      type: Boolean,
+      default: false
+    },
+    showNoColor: {
+      type: Boolean,
+      default: false
+    },
+    showTransparent: {
       type: Boolean,
       default: false
     },
@@ -3655,86 +3663,90 @@ var render = function() {
     [
       _vm.listLayout
         ? [
-            _c(
-              "li",
-              {
-                staticClass: "vc-compact-list-layout-item-container",
-                attrs: { role: "option", "aria-label": "No Color" },
-                on: {
-                  click: function($event) {
-                    _vm.handlerClick("00000000")
-                  }
-                }
-              },
-              [
-                _c(
-                  "div",
+            _vm.showNoColor
+              ? _c(
+                  "li",
                   {
-                    staticClass:
-                      "vc-compact-list-layout-color-item vc-compact-list-layout-color-item--no-color vc-compact-color-item--white"
+                    staticClass: "vc-compact-list-layout-item-container",
+                    attrs: { role: "option", "aria-label": "No Color" },
+                    on: {
+                      click: function($event) {
+                        _vm.handlerClick("00000000")
+                      }
+                    }
                   },
                   [
-                    _c("div", {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.colors.nocolor,
-                          expression: "colors.nocolor"
-                        }
-                      ],
-                      staticClass: "vc-compact-dot list-layout"
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "vc-compact-color-label" }, [
-                  _vm._v("No Color")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "vc-compact-list-layout-item-container",
-                attrs: { role: "option", "aria-label": "Transparent" },
-                on: {
-                  click: function($event) {
-                    _vm.handlerClick("FFFFFF00")
-                  }
-                }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "vc-compact-list-layout-color-item vc-compact-color-item--white"
-                  },
-                  [
-                    _c("checkboard"),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "vc-compact-list-layout-color-item vc-compact-list-layout-color-item--no-color vc-compact-color-item--white"
+                      },
+                      [
+                        _c("div", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.colors.nocolor,
+                              expression: "colors.nocolor"
+                            }
+                          ],
+                          staticClass: "vc-compact-dot list-layout"
+                        })
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.colors.a === 0 && !_vm.colors.nocolor,
-                          expression: "colors.a === 0 && !colors.nocolor"
-                        }
+                    _c("span", { staticClass: "vc-compact-color-label" }, [
+                      _vm._v("No Color")
+                    ])
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.showTransparent
+              ? _c(
+                  "li",
+                  {
+                    staticClass: "vc-compact-list-layout-item-container",
+                    attrs: { role: "option", "aria-label": "Transparent" },
+                    on: {
+                      click: function($event) {
+                        _vm.handlerClick("FFFFFF00")
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "vc-compact-list-layout-color-item vc-compact-color-item--white"
+                      },
+                      [
+                        _c("checkboard"),
+                        _vm._v(" "),
+                        _c("div", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.colors.a === 0 && !_vm.colors.nocolor,
+                              expression: "colors.a === 0 && !colors.nocolor"
+                            }
+                          ],
+                          staticClass: "vc-compact-dot list-layout"
+                        })
                       ],
-                      staticClass: "vc-compact-dot list-layout"
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "vc-compact-color-label" }, [
-                  _vm._v("Transparent")
-                ])
-              ]
-            ),
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "vc-compact-color-label" }, [
+                      _vm._v("Transparent")
+                    ])
+                  ]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "ul",

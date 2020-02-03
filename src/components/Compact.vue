@@ -2,6 +2,7 @@
   <div role="application" aria-label="Compact color picker" class="vc-compact" :class="{'big-swatch-styles': bigSwatchStyles, 'list-layout': listLayout}">
     <template v-if="listLayout">
         <li
+          v-if="showNoColor"
           role="option"
           :aria-label="'No Color'"
           class="vc-compact-list-layout-item-container"
@@ -15,6 +16,7 @@
             <span class="vc-compact-color-label">No Color</span>
         </li>
         <li
+          v-if="showTransparent"
           role="option"
           :aria-label="'Transparent'"
           class="vc-compact-list-layout-item-container"
@@ -100,9 +102,17 @@ export default {
     },
     listLayout: {
       type: Boolean,
-      default: true
+      default: false
     },
     bigSwatchStyles: {
+      type: Boolean,
+      default: false
+    },
+    showNoColor: {
+      type: Boolean,
+      default: false
+    },
+    showTransparent: {
       type: Boolean,
       default: false
     },
