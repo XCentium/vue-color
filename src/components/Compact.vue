@@ -7,7 +7,7 @@
           :aria-label="'No Color'"
           :aria-selected="colors.nocolor"
           class="vc-compact-list-layout-item-container"
-          @click="handlerClick('00000000')"
+          @click="handlerClick('#00000000')"
         >
           <div
             class="vc-compact-list-layout-color-item vc-compact-list-layout-color-item--no-color vc-compact-color-item--white"
@@ -22,7 +22,7 @@
           :aria-label="'Transparent'"
           :aria-selected="colors.a === 0 && !colors.nocolor"
           class="vc-compact-list-layout-item-container"
-          @click="handlerClick('FFFFFF00')"
+          @click="handlerClick('#FFFFFF00')"
         >
           <div
             class="vc-compact-list-layout-color-item vc-compact-color-item--white"
