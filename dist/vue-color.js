@@ -510,18 +510,18 @@ var _tinycolor2 = _interopRequireDefault(_tinycolor);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _colorChange(data, oldHue) {
-  console.log('_colorChange data:', data);
   var alpha = data && data.a;
   var color;
-  var nocolor = data.source === 'hex8' && data.hex === '#00000000';
-  console.log('data.hex8', data.hex8);
-  console.log('data.hex8 === #00000000', data.hex8 === '#00000000');
-  console.log('nocolor:', nocolor);
+  var nocolor = data.source === 'hex8' && data.hex8 === '#00000000';
 
   if (data && data.hsl) {
     color = (0, _tinycolor2.default)(data.hsl);
   } else if (data && data.hex && data.hex.length > 0) {
     color = (0, _tinycolor2.default)(data.hex);
+  } else if (data && data.hex8 && data.hex8.toUpperCase() === '#FFFFFF00') {
+    color = (0, _tinycolor2.default)(data.hex8);
+  } else if (nocolor) {
+    color = (0, _tinycolor2.default)(data.hex8);
   } else {
     color = (0, _tinycolor2.default)(data);
   }
@@ -975,15 +975,6 @@ exports.default = {
     'ed-in': _EditableInput2.default,
     checkboard: _Checkboard2.default
   },
-  mounted: function mounted() {
-    console.log('pick on mount:', this.pick);
-  },
-
-  watch: {
-    pick: function pick() {
-      console.log('pick changed:', this.pick);
-    }
-  },
   computed: {
     pick: function pick() {
       return this.colors.hex8 === '#00000000' || this.colors.hex8 === '#FFFFFF00' ? this.colors.hex8.toUpperCase() : this.colors.hex.toUpperCase();
@@ -991,13 +982,17 @@ exports.default = {
   },
   methods: {
     handlerClick: function handlerClick(c) {
-      var source = c.length === 9 ? 'hex8' : 'hex';
-      console.log('source determined in handlerClick():', source);
-      console.log('color in handlerClick()', c);
-      this.colorChange({
-        hex: c,
-        source: source
-      });
+      var colorObject = {};
+      var hex8Source = c.length === 9 && c.substring(0, 1) === '#';
+      if (hex8Source) {
+        colorObject.hex8 = c;
+        colorObject.source = 'hex8';
+      } else {
+        colorObject.hex = c;
+        colorObject.source = 'hex';
+      }
+
+      this.colorChange(colorObject);
     }
   }
 };
@@ -3732,8 +3727,7 @@ var render = function() {
                     attrs: {
                       role: "option",
                       "aria-label": "Transparent",
-                      "aria-selected":
-                        _vm.colors.a === 0 && _vm.colors.hex8 === "#FFFFFF00"
+                      "aria-selected": _vm.colors.a === 0 && !_vm.colors.nocolor
                     },
                     on: {
                       click: function($event) {
@@ -3756,11 +3750,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value:
-                                _vm.colors.a === 0 &&
-                                _vm.colors.hex8 === "#FFFFFF00",
-                              expression:
-                                "colors.a === 0 && colors.hex8 === '#FFFFFF00'"
+                              value: _vm.colors.a === 0 && !_vm.colors.nocolor,
+                              expression: "colors.a === 0 && !colors.nocolor"
                             }
                           ],
                           staticClass: "vc-compact-dot list-layout"
@@ -3814,8 +3805,12 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: c === _vm.pick && _vm.colors.a !== 0,
-                                  expression: "c === pick && colors.a !== 0"
+                                  value:
+                                    c === _vm.pick &&
+                                    _vm.colors.a !== 0 &&
+                                    !_vm.colors.nocolor,
+                                  expression:
+                                    "c === pick && colors.a !== 0 && !colors.nocolor"
                                 }
                               ],
                               staticClass: "vc-compact-dot",

@@ -20,7 +20,7 @@
           v-if="showTransparent"
           role="option"
           :aria-label="'Transparent'"
-          :aria-selected="colors.a === 0 && colors.hex8 === '#FFFFFF00'"
+          :aria-selected="colors.a === 0 && !colors.nocolor"
           class="vc-compact-list-layout-item-container"
           @click="handlerClick('#FFFFFF00')"
         >
@@ -28,7 +28,7 @@
             class="vc-compact-list-layout-color-item vc-compact-color-item--white"
           >
             <checkboard></checkboard>
-            <div class="vc-compact-dot list-layout" v-show="colors.a === 0 && colors.hex8 === '#FFFFFF00'"></div>
+            <div class="vc-compact-dot list-layout" v-show="colors.a === 0 && !colors.nocolor"></div>
           </div>
             <span class="vc-compact-color-label">Transparent</span>
         </li>
@@ -47,7 +47,7 @@
               class="vc-compact-list-layout-color-item"
               :class="{'vc-compact-color-item--white': c === '#FFFFFF'}"
             >
-              <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick && colors.a !== 0"></div>
+              <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick && colors.a !== 0 && !colors.nocolor"></div>
             </div>
             <span class="vc-compact-color-label" v-html="getColorName(c, colorDetails)"></span>
           </li>
@@ -129,14 +129,6 @@ export default {
     'ed-in': editableInput,
     checkboard
   },
-  mounted () {
-    console.log('pick on mount:', this.pick)
-  },
-  watch: {
-    pick () {
-      console.log('pick changed:', this.pick)
-    }
-  },
   computed: {
     pick () {
       return (this.colors.hex8 === '#00000000' || this.colors.hex8 === '#FFFFFF00') ? this.colors.hex8.toUpperCase() : this.colors.hex.toUpperCase()
@@ -145,13 +137,17 @@ export default {
   },
   methods: {
     handlerClick (c) {
-      let source = (c.length === 9) ? 'hex8' : 'hex'
-      console.log('source determined in handlerClick():', source)
-      console.log('color in handlerClick()', c)
-      this.colorChange({
-        hex: c,
-        source: source
-      })
+      let colorObject = {}
+      let hex8Source = (c.length === 9 && c.substring(0, 1) === '#')
+      if (hex8Source) {
+        colorObject.hex8 = c
+        colorObject.source = 'hex8'
+      } else {
+        colorObject.hex = c
+        colorObject.source = 'hex'
+      }
+
+      this.colorChange(colorObject)
     }
   }
 }
