@@ -605,13 +605,11 @@ exports.default = {
       }
     },
     paletteUpperCase: function paletteUpperCase(palette) {
-      var p = palette.filter(function (c) {
+      return palette.filter(function (c) {
         return c.toLowerCase() !== 'transparent';
       }).map(function (c) {
         return c.toUpperCase();
       });
-      console.log('palette is now:', p);
-      return p;
     },
     isTransparent: function isTransparent(color) {
       return (0, _tinycolor2.default)(color).getAlpha() === 0;
