@@ -37,7 +37,7 @@
           <li
             role="option"
             :aria-label="'color:' + c"
-            :aria-selected="c === pick"
+            :aria-selected="c === pick && colors.a !== 0 && !colors.nocolor"
             class="vc-compact-list-layout-item-container"
             :key="c"
             @click="handlerClick(c)"

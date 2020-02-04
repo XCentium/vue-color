@@ -3781,7 +3781,10 @@ var render = function() {
                         attrs: {
                           role: "option",
                           "aria-label": "color:" + c,
-                          "aria-selected": c === _vm.pick
+                          "aria-selected":
+                            c === _vm.pick &&
+                            _vm.colors.a !== 0 &&
+                            !_vm.colors.nocolor
                         },
                         on: {
                           click: function($event) {
