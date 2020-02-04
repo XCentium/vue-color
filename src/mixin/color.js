@@ -113,7 +113,11 @@ export default {
       }
     },
     paletteUpperCase (palette) {
-      return palette.map(c => c.toUpperCase())
+      let p = palette.filter(c => c.toLowerCase() !== 'transparent').map(c => c.toUpperCase())
+      console.log('palette is now:', p)
+      return p
+      // return palette.filter(c => c.toLowerCase() !== 'transparent').map(c => c.toUpperCase())
+      // return palette.map(c => c.toUpperCase())
     },
     isTransparent (color) {
       return tinycolor(color).getAlpha() === 0

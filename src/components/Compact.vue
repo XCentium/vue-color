@@ -132,7 +132,6 @@ export default {
   computed: {
     pick () {
       return (this.colors.hex8 === '#00000000' || this.colors.hex8 === '#FFFFFF00') ? this.colors.hex8.toUpperCase() : this.colors.hex.toUpperCase()
-      // return this.colors.hex.toUpperCase()
     }
   },
   methods: {
