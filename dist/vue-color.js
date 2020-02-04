@@ -514,6 +514,8 @@ function _colorChange(data, oldHue) {
   var alpha = data && data.a;
   var color;
   var nocolor = data.hex8 === '#00000000';
+  console.log('data.hex8', data.hex8);
+  console.log('data.hex8 === #00000000', data.hex8 === '#00000000');
   console.log('nocolor:', nocolor);
 
   if (data && data.hsl) {
