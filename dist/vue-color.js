@@ -513,7 +513,7 @@ function _colorChange(data, oldHue) {
   console.log('_colorChange data:', data);
   var alpha = data && data.a;
   var color;
-  var nocolor = data.hex8 === '#00000000';
+  var nocolor = data.source === 'hex8' && data.hex === '#00000000';
   console.log('data.hex8', data.hex8);
   console.log('data.hex8 === #00000000', data.hex8 === '#00000000');
   console.log('nocolor:', nocolor);
@@ -993,6 +993,7 @@ exports.default = {
     handlerClick: function handlerClick(c) {
       var source = c.length === 9 ? 'hex8' : 'hex';
       console.log('source determined in handlerClick():', source);
+      console.log('color in handlerClick()', c);
       this.colorChange({
         hex: c,
         source: source
@@ -3686,7 +3687,7 @@ var render = function() {
                     attrs: {
                       role: "option",
                       "aria-label": "No Color",
-                      "aria-selected": _vm.colors.hex8 === "#00000000"
+                      "aria-selected": _vm.colors.nocolor
                     },
                     on: {
                       click: function($event) {
@@ -3707,8 +3708,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: _vm.colors.hex8 === "#00000000",
-                              expression: "colors.hex8 === '#00000000'"
+                              value: _vm.colors.nocolor,
+                              expression: "colors.nocolor"
                             }
                           ],
                           staticClass: "vc-compact-dot list-layout"

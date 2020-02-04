@@ -5,14 +5,14 @@
           v-if="showNoColor"
           role="option"
           :aria-label="'No Color'"
-          :aria-selected="colors.hex8 === '#00000000'"
+          :aria-selected="colors.nocolor"
           class="vc-compact-list-layout-item-container"
           @click="handlerClick('#00000000')"
         >
           <div
             class="vc-compact-list-layout-color-item vc-compact-list-layout-color-item--no-color vc-compact-color-item--white"
           >
-            <div class="vc-compact-dot list-layout" v-show="colors.hex8 === '#00000000'"></div>
+            <div class="vc-compact-dot list-layout" v-show="colors.nocolor"></div>
           </div>
             <span class="vc-compact-color-label">No Color</span>
         </li>
@@ -147,6 +147,7 @@ export default {
     handlerClick (c) {
       let source = (c.length === 9) ? 'hex8' : 'hex'
       console.log('source determined in handlerClick():', source)
+      console.log('color in handlerClick()', c)
       this.colorChange({
         hex: c,
         source: source

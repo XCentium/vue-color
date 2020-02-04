@@ -4,7 +4,7 @@ function _colorChange (data, oldHue) {
   console.log('_colorChange data:', data)
   var alpha = data && data.a
   var color
-  let nocolor = data.hex8 === '#00000000'
+  let nocolor = data.source === 'hex8' && data.hex === '#00000000'
   console.log('data.hex8', data.hex8)
   console.log('data.hex8 === #00000000', data.hex8 === '#00000000')
   console.log('nocolor:', nocolor)
