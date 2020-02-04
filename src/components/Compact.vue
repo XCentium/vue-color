@@ -129,15 +129,24 @@ export default {
     'ed-in': editableInput,
     checkboard
   },
+  mounted () {
+    console.log('pick on mount:', this.pick)
+  },
+  watch: {
+    pick () {
+      console.log('pick changed:', this.pick)
+    }
+  },
   computed: {
     pick () {
-      return this.colors.hex.toUpperCase()
+      return (this.colors.hex8 === '#00000000' || this.colors.hex8 === '#FFFFFF00') ? this.colors.hex8.toUpperCase() : this.colors.hex.toUpperCase()
+      // return this.colors.hex.toUpperCase()
     }
   },
   methods: {
     handlerClick (c) {
       let source = (c.length === 9) ? 'hex8' : 'hex'
-
+      console.log('source determined in handlerClick():', source)
       this.colorChange({
         hex: c,
         source: source

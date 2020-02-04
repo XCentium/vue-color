@@ -514,6 +514,7 @@ function _colorChange(data, oldHue) {
   var alpha = data && data.a;
   var color;
   var nocolor = data.hex8 === '#00000000';
+  console.log('nocolor:', nocolor);
 
   if (data && data.hsl) {
     color = (0, _tinycolor2.default)(data.hsl);
@@ -972,15 +973,24 @@ exports.default = {
     'ed-in': _EditableInput2.default,
     checkboard: _Checkboard2.default
   },
+  mounted: function mounted() {
+    console.log('pick on mount:', this.pick);
+  },
+
+  watch: {
+    pick: function pick() {
+      console.log('pick changed:', this.pick);
+    }
+  },
   computed: {
     pick: function pick() {
-      return this.colors.hex.toUpperCase();
+      return this.colors.hex8 === '#00000000' || this.colors.hex8 === '#FFFFFF00' ? this.colors.hex8.toUpperCase() : this.colors.hex.toUpperCase();
     }
   },
   methods: {
     handlerClick: function handlerClick(c) {
       var source = c.length === 9 ? 'hex8' : 'hex';
-
+      console.log('source determined in handlerClick():', source);
       this.colorChange({
         hex: c,
         source: source

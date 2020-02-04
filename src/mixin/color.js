@@ -5,6 +5,7 @@ function _colorChange (data, oldHue) {
   var alpha = data && data.a
   var color
   let nocolor = data.hex8 === '#00000000'
+  console.log('nocolor:', nocolor)
 
   // hsl is better than hex between conversions
   if (data && data.hsl) {
