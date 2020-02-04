@@ -5,14 +5,14 @@
           v-if="showNoColor"
           role="option"
           :aria-label="'No Color'"
-          :aria-selected="colors.nocolor"
+          :aria-selected="colors.hex8 === '#00000000'"
           class="vc-compact-list-layout-item-container"
           @click="handlerClick('#00000000')"
         >
           <div
             class="vc-compact-list-layout-color-item vc-compact-list-layout-color-item--no-color vc-compact-color-item--white"
           >
-            <div class="vc-compact-dot list-layout" v-show="colors.nocolor"></div>
+            <div class="vc-compact-dot list-layout" v-show="colors.hex8 === '#00000000'"></div>
           </div>
             <span class="vc-compact-color-label">No Color</span>
         </li>
@@ -20,7 +20,7 @@
           v-if="showTransparent"
           role="option"
           :aria-label="'Transparent'"
-          :aria-selected="colors.a === 0 && !colors.nocolor"
+          :aria-selected="colors.a === 0 && colors.hex8 === '#FFFFFF00'"
           class="vc-compact-list-layout-item-container"
           @click="handlerClick('#FFFFFF00')"
         >
@@ -28,7 +28,7 @@
             class="vc-compact-list-layout-color-item vc-compact-color-item--white"
           >
             <checkboard></checkboard>
-            <div class="vc-compact-dot list-layout" v-show="colors.a === 0 && !colors.nocolor"></div>
+            <div class="vc-compact-dot list-layout" v-show="colors.a === 0 && colors.hex8 === '#FFFFFF00'"></div>
           </div>
             <span class="vc-compact-color-label">Transparent</span>
         </li>

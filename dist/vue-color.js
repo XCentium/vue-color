@@ -3686,7 +3686,7 @@ var render = function() {
                     attrs: {
                       role: "option",
                       "aria-label": "No Color",
-                      "aria-selected": _vm.colors.nocolor
+                      "aria-selected": _vm.colors.hex8 === "#00000000"
                     },
                     on: {
                       click: function($event) {
@@ -3707,8 +3707,8 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: _vm.colors.nocolor,
-                              expression: "colors.nocolor"
+                              value: _vm.colors.hex8 === "#00000000",
+                              expression: "colors.hex8 === '#00000000'"
                             }
                           ],
                           staticClass: "vc-compact-dot list-layout"
@@ -3731,7 +3731,8 @@ var render = function() {
                     attrs: {
                       role: "option",
                       "aria-label": "Transparent",
-                      "aria-selected": _vm.colors.a === 0 && !_vm.colors.nocolor
+                      "aria-selected":
+                        _vm.colors.a === 0 && _vm.colors.hex8 === "#FFFFFF00"
                     },
                     on: {
                       click: function($event) {
@@ -3754,8 +3755,11 @@ var render = function() {
                             {
                               name: "show",
                               rawName: "v-show",
-                              value: _vm.colors.a === 0 && !_vm.colors.nocolor,
-                              expression: "colors.a === 0 && !colors.nocolor"
+                              value:
+                                _vm.colors.a === 0 &&
+                                _vm.colors.hex8 === "#FFFFFF00",
+                              expression:
+                                "colors.a === 0 && colors.hex8 === '#FFFFFF00'"
                             }
                           ],
                           staticClass: "vc-compact-dot list-layout"
