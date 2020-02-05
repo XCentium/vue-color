@@ -202,7 +202,7 @@ export default {
   background: linear-gradient(-30deg,
   rgba(255, 255, 255, 1) calc(50% - 2px),
   rgba(255,0,0,1) calc(50%),
-  rgba(255, 255, 255, 1) calc(50% + 2px));
+  rgba(255, 255, 255, 1) calc(50% + 2px)) !important;
 }
 .vc-compact-color-label {
   vertical-align: middle;
