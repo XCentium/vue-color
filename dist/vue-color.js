@@ -995,6 +995,12 @@ exports.default = {
       }
 
       this.colorChange(colorObject);
+    },
+    isWhiteTransparentNoColor: function isWhiteTransparentNoColor(c) {
+      return c === '#FFFFFF' || c === '#00000000' || c === '#FFFFFF00';
+    },
+    isNoColor: function isNoColor(c) {
+      return c === '#00000000';
     }
   }
 };
@@ -3800,10 +3806,12 @@ var render = function() {
                           {
                             staticClass: "vc-compact-list-layout-color-item",
                             class: {
-                              "vc-compact-color-item--white":
-                                c === "#FFFFFF" ||
-                                c === "#00000000" ||
-                                c === "#FFFFFF00"
+                              "vc-compact-color-item--white": _vm.isWhiteTransparentNoColor(
+                                c
+                              ),
+                              "vc-compact-list-layout-color-item--no-color": _vm.isNoColor(
+                                c
+                              )
                             },
                             style: { background: c }
                           },

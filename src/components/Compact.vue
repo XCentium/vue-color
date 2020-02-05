@@ -45,7 +45,7 @@
             <div
               :style="{background: c}"
               class="vc-compact-list-layout-color-item"
-              :class="{'vc-compact-color-item--white': c === '#FFFFFF' || c === '#00000000' || c === '#FFFFFF00'}"
+              :class="{'vc-compact-color-item--white': isWhiteTransparentNoColor(c), 'vc-compact-list-layout-color-item--no-color': isNoColor(c)}"
             >
               <div class="vc-compact-dot" :class="{'list-layout': listLayout}" v-show="c === pick && colors.a !== 0 && !colors.nocolor"></div>
             </div>
@@ -144,6 +144,12 @@ export default {
       }
 
       this.colorChange(colorObject)
+    },
+    isWhiteTransparentNoColor (c) {
+      return (c === '#FFFFFF' || c === '#00000000' || c === '#FFFFFF00')
+    },
+    isNoColor (c) {
+      return c === '#00000000'
     }
   }
 }
