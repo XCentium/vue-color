@@ -1,9 +1,10 @@
 import tinycolor from 'tinycolor2'
 
 function _colorChange (data, oldHue) {
+  console.log('data is:', data)
   var alpha = data && data.a
   var color
-  let nocolor = (data.source === 'hex8' && data.hex8 === '#00000000')
+  let nocolor = data === '#00000000' || (data.source === 'hex8' && data.hex8 === '#00000000')
 
   // hsl is better than hex between conversions
   if (data && data.hsl) {
@@ -15,7 +16,11 @@ function _colorChange (data, oldHue) {
     color = tinycolor(data.hex8)
     // To preserve the passed in #00000000 value for toggling no color
   } else if (nocolor) {
-    color = tinycolor(data.hex8)
+    if (data.hex8) {
+      color = tinycolor(data.hex8)
+    } else {
+      color = tinycolor(data)
+    }
   } else {
     color = tinycolor(data)
   }
