@@ -3800,7 +3800,10 @@ var render = function() {
                           {
                             staticClass: "vc-compact-list-layout-color-item",
                             class: {
-                              "vc-compact-color-item--white": c === "#FFFFFF"
+                              "vc-compact-color-item--white":
+                                c === "#FFFFFF" ||
+                                c === "#00000000" ||
+                                c === "#FFFFFF00"
                             },
                             style: { background: c }
                           },
