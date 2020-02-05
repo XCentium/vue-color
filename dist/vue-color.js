@@ -512,7 +512,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _colorChange(data, oldHue) {
   var alpha = data && data.a;
   var color;
-  var nocolor = data.source === 'hex8' && data.hex8 === '#00000000';
+  var nocolor = data === '#00000000' || data.source === 'hex8' && data.hex8 === '#00000000';
 
   if (data && data.hsl) {
     color = (0, _tinycolor2.default)(data.hsl);
