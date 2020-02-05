@@ -510,10 +510,9 @@ var _tinycolor2 = _interopRequireDefault(_tinycolor);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _colorChange(data, oldHue) {
-  console.log('data is:', data);
   var alpha = data && data.a;
   var color;
-  var nocolor = data === '#00000000' || data.source === 'hex8' && data.hex8 === '#00000000';
+  var nocolor = data.source === 'hex8' && data.hex8 === '#00000000';
 
   if (data && data.hsl) {
     color = (0, _tinycolor2.default)(data.hsl);
@@ -522,11 +521,7 @@ function _colorChange(data, oldHue) {
   } else if (data && data.hex8 && data.hex8.toUpperCase() === '#FFFFFF00') {
     color = (0, _tinycolor2.default)(data.hex8);
   } else if (nocolor) {
-    if (data.hex8) {
-      color = (0, _tinycolor2.default)(data.hex8);
-    } else {
-      color = (0, _tinycolor2.default)(data);
-    }
+    color = (0, _tinycolor2.default)(data.hex8);
   } else {
     color = (0, _tinycolor2.default)(data);
   }
