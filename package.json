@@ -1,10 +1,15 @@
 {
-  "name": "vue-color",
-  "version": "2.7.0",
-  "description": "Color of Vue Components",
+  "name": "xc-vue-color",
+  "version": "1.0.0",
+  "description": "Customized version of vue-color for Flex Accelerator",
   "keywords": [
     "color",
-    "vuejs"
+    "vuejs",
+    "XCentium",
+    "XC",
+    "Sitecore",
+    "Flex",
+    "Flex Accelerator"
   ],
   "main": "dist/vue-color.min.js",
   "scripts": {
@@ -16,9 +21,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaokaike/vue-color"
+    "url": "git+https://github.com/XCentium/vue-color.git"
   },
-  "author": "xiaokai <kexiaokai@gmail.com>",
   "dependencies": {
     "clamp": "^1.0.1",
     "lodash.throttle": "^4.0.0",
@@ -62,5 +66,12 @@
     "webpack-hot-middleware": "^2.22.1",
     "webpack-merge": "^4.1.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/XCentium/vue-color/issues"
+  },
+  "homepage": "https://github.com/XCentium/vue-color#readme",
+  "directories": {
+    "example": "example"
+  }
 }

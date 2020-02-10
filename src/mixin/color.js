@@ -3,12 +3,19 @@ import tinycolor from 'tinycolor2'
 function _colorChange (data, oldHue) {
   var alpha = data && data.a
   var color
+  let nocolor = (data.source === 'hex8' && data.hex8 === '#00000000')
 
   // hsl is better than hex between conversions
   if (data && data.hsl) {
     color = tinycolor(data.hsl)
   } else if (data && data.hex && data.hex.length > 0) {
     color = tinycolor(data.hex)
+    // To preserve the passed in #FFFFFF00 value for toggling transparent color
+  } else if (data && data.hex8 && data.hex8.toUpperCase() === '#FFFFFF00') {
+    color = tinycolor(data.hex8)
+    // To preserve the passed in #00000000 value for toggling no color
+  } else if (nocolor) {
+    color = tinycolor(data.hex8)
   } else {
     color = tinycolor(data)
   }
@@ -47,7 +54,8 @@ function _colorChange (data, oldHue) {
     hsv: hsv,
     oldHue: data.h || oldHue || hsl.h,
     source: data.source,
-    a: data.a || color.getAlpha()
+    a: data.a || color.getAlpha(),
+    nocolor: nocolor
   }
 }
 
@@ -67,6 +75,9 @@ export default {
         this.val = newVal
         this.$emit('input', newVal)
       }
+    },
+    colorDetails () {
+      return this.flexColorSettings
     }
   },
   watch: {
@@ -102,10 +113,17 @@ export default {
       }
     },
     paletteUpperCase (palette) {
-      return palette.map(c => c.toUpperCase())
+      return palette.filter(c => c.toLowerCase() !== 'transparent').map(c => c.toUpperCase())
     },
     isTransparent (color) {
       return tinycolor(color).getAlpha() === 0
+    },
+    getColorName (color, colorDetails) {
+      if (colorDetails) {
+        let colorIndex = colorDetails.findIndex(colorObject => colorObject.value.toUpperCase() === color.toUpperCase())
+        return colorIndex > -1 ? colorDetails[colorIndex].displayName : 'No Color Name'
+      }
+      return 'No Color Details'
     }
   }
 }
