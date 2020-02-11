@@ -1,5 +1,5 @@
 {
-  "name": "xc-vue-color",
+  "name": "@xcentium/vue-color",
   "version": "1.0.0",
   "description": "Customized version of vue-color for Flex Accelerator",
   "keywords": [

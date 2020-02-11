@@ -1,8 +1,8 @@
-# vue-color 
+# XCentium vue-color 
 
 [![npm](https://img.shields.io/npm/v/vue-color.svg)](https://www.npmjs.com/package/vue-color)
 
-Color Pickers for Sketch, Photoshop, Chrome & more with Vue.js(vue2.0).  
+Color Pickers for Sketch, Photoshop, Chrome & more with Vue.js. This is a fork of [vue-color](https://github.com/xiaokaike/vue-color) with additional functionality baked in to support Flex 2.0.
 
 ## [Live demo](http://xiaokaike.github.io/vue-color/)
 
@@ -12,7 +12,7 @@ Color Pickers for Sketch, Photoshop, Chrome & more with Vue.js(vue2.0).
 
 ### NPM
 ```bash
-$ npm install vue-color
+$ npm install @xcentium/vue-color
 ```
 
 ### CommonJS
